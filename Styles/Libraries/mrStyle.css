@@ -1,0 +1,272 @@
+﻿﻿/*	                                         SSSSSSSSSSSSSSS      tttt                              lllllll                                                                                                                                  
+                                           SS:::::::::::::::S  ttt:::t                              l:::::l                     
+                                          S:::::SSSSSS::::::S  t:::::t                              l:::::l                     
+                                          S:::::S     SSSSSSS  t:::::t                              l:::::l                     
+   mmmmmmm    mmmmmmm   rrrrr   rrrrrrrrr S:::::S        ttttttt:::::tttttttyyyyyyy           yyyyyyyl::::l     eeeeeeeeeeee    
+ mm:::::::m  m:::::::mm r::::rrr:::::::::rS:::::S        t:::::::::::::::::t y:::::y         y:::::y l::::l   ee::::::::::::ee  
+m::::::::::mm::::::::::mr:::::::::::::::::rS::::SSSS     t:::::::::::::::::t  y:::::y       y:::::y  l::::l  e::::::eeeee:::::ee
+m::::::::::::::::::::::mrr::::::rrrrr::::::rSS::::::SSSSStttttt:::::::tttttt   y:::::y     y:::::y   l::::l e::::::e     e:::::e
+m:::::mmm::::::mmm:::::m r:::::r     r:::::r  SSS::::::::SS    t:::::t          y:::::y   y:::::y    l::::l e:::::::eeeee::::::e
+m::::m   m::::m   m::::m r:::::r     rrrrrrr     SSSSSS::::S   t:::::t           y:::::y y:::::y     l::::l e:::::::::::::::::e 
+m::::m   m::::m   m::::m r:::::r                      S:::::S  t:::::t            y:::::y:::::y      l::::l e::::::eeeeeeeeeee  
+m::::m   m::::m   m::::m r:::::r                      S:::::S  t:::::t    tttttt   y:::::::::y       l::::l e:::::::e           
+m::::m   m::::m   m::::m r:::::r          SSSSSSS     S:::::S  t::::::tttt:::::t    y:::::::y       l::::::le::::::::e          
+m::::m   m::::m   m::::m r:::::r          S::::::SSSSSS:::::S  tt::::::::::::::t     y:::::y        l::::::l e::::::::eeeeeeee  
+m::::m   m::::m   m::::m r:::::r          S:::::::::::::::SS     tt:::::::::::tt    y:::::y         l::::::l  ee:::::::::::::e  
+mmmmmm   mmmmmm   mmmmmm rrrrrrr           SSSSSSSSSSSSSSS         ttttttttttt     y:::::y          llllllll    eeeeeeeeeeeeee  
+                                                                                  y:::::y                                       
+                                                                                 y:::::y                                        
+                                                                                y:::::y                                         
+                                                                               y:::::y                                          
+                                                                              yyyyyyy                                           
+Current Styles:
+- mrBloody
+- mrBlueSky
+- mrDark
+- mrDot
+- mrDystopian
+- mrEnamel
+- mrFlow
+- mrLavender
+- mrLine
+- mrPeachy
+- mrRetro
+- mrRoddy
+- mrShadow
+- mrShady
+- mrShrink
+- mrSpacey
+*/                                                                                                                             
+
+/* Reset Code (meyerweb) */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline; } article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; } body { line-height: 1; } ol, ul { list-style: none; } blockquote, q { quotes: none; } blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; } table { border-collapse: collapse; border-spacing: 0; } 
+
+/* Root */
+
+:root { font-family : Verdana, Sans-Serif; font-size: 20px; }
+                       
+/* Backgrounds */
+
+.mrRetroBlue { background: rgb(103,169,168); }
+.mrRetroYellow { background : rgb(252,238,193); }
+.mrOrangeBrickRoad { background: #ffb76b;background: -webkit-linear-gradient(top,  #ffb76b 0%,#ffa73d 31%,#ff7c00 72%,#ff7f04 100%);background: -ms-linear-gradient(top,  #ffb76b 0%,#ffa73d 31%,#ff7c00 72%,#ff7f04 100%);background: linear-gradient(to bottom,  #ffb76b 0%,#ffa73d 31%,#ff7c00 72%,#ff7f04 100%);}
+.mrMoonShine { background: #e4f5fc; background: -moz-radial-gradient(center, ellipse cover, #e4f5fc 0%, #9fd8ef 20%, #bfe8f9 50%, #9fd8ef 55%, #9fd8ef 59%, #2ab0ed 100%); background: -webkit-radial-gradient(center, ellipse cover, #e4f5fc 0%,#9fd8ef 20%,#bfe8f9 50%,#9fd8ef 55%,#9fd8ef 59%,#2ab0ed 100%); background: radial-gradient(ellipse at center, #e4f5fc 0%,#9fd8ef 20%,#bfe8f9 50%,#9fd8ef 55%,#9fd8ef 59%,#2ab0ed 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4f5fc', endColorstr='#2ab0ed',GradientType=1 ); }
+.mrAliceBlue { background : AliceBlue; } .mrAntiqueWhite { background : AntiqueWhite; } .mrAqua { background : Aqua; } .mrAquamarine { background : Aquamarine; } .mrAzure { background : Azure; } .mrBeige { background : Beige; } .mrBisque { background : Bisque; } .mrBlack { background : Black; } .mrBlanchedAlmond { background : BlanchedAlmond; } .mrBlue { background : Blue; } .mrBlueViolet { background : BlueViolet; } .mrBrown { background : Brown; } .mrBurlyWood { background : BurlyWood; } .mrCadetBlue { background : CadetBlue; } .mrChartreuse { background : Chartreuse; } .mrChocolate { background : Chocolate; } .mrCoral { background : Coral; } .mrCornflowerBlue { background : CornflowerBlue; } .mrCornsilk { background : Cornsilk; } .mrCrimson { background : Crimson; } .mrCyan { background : Cyan; } .mrDarkBlue { background : DarkBlue; } .mrDarkCyan { background : DarkCyan; } .mrDarkGoldenRod { background : DarkGoldenRod; } .mrDarkGray { background : DarkGray; } .mrDarkGrey { background : DarkGrey; } .mrDarkGreen { background : DarkGreen; } .mrDarkKhaki { background : DarkKhaki; } .mrDarkMagenta { background : DarkMagenta; } .mrDarkOliveGreen { background : DarkOliveGreen; } .mrDarkOrange { background : DarkOrange; } .mrDarkOrchid { background : DarkOrchid; } .mrDarkRed { background : DarkRed; } .mrDarkSalmon { background : DarkSalmon; } .mrDarkSeaGreen { background : DarkSeaGreen; } .mrDarkSlateBlue { background : DarkSlateBlue; } .mrDarkSlateGray { background : DarkSlateGray; } .mrDarkSlateGrey { background : DarkSlateGrey; } .mrDarkTurquoise { background : DarkTurquoise; } .mrDarkViolet { background : DarkViolet; } .mrDeepPink { background : DeepPink; } .mrDeepSkyBlue { background : DeepSkyBlue; } .mrDimGray { background : DimGray; } .mrDimGrey { background : DimGrey; } .mrDodgerBlue { background : DodgerBlue; } .mrFireBrick { background : FireBrick; } .mrFloralWhite { background : FloralWhite; } .mrForestGreen { background : ForestGreen; } .mrFuchsia { background : Fuchsia; } .mrGainsboro { background : Gainsboro; } .mrGhostWhite { background : GhostWhite; } .mrGold { background : Gold; } .mrGoldenRod { background : GoldenRod; } .mrGray { background : Gray; } .mrGrey { background : Grey; } .mrGreen { background : Green; } .mrGreenYellow { background : GreenYellow; } .mrHoneyDew { background : HoneyDew; } .mrHotPink { background : HotPink; } .mrIndianRed { background : IndianRed; } .mrIndigo { background : Indigo; } .mrIvory { background : Ivory; } .mrKhaki { background : Khaki; } .mrLavender { background : Lavender; } .mrLavenderBlush { background : LavenderBlush; } .mrLawnGreen { background : LawnGreen; } .mrLemonChiffon { background : LemonChiffon; } .mrLightBlue { background : LightBlue; } .mrLightCoral { background : LightCoral; } .mrLightCyan { background : LightCyan; } .mrLightGoldenRodYellow { background : LightGoldenRodYellow; } .mrLightGray { background : LightGray; } .mrLightGrey { background : LightGrey; } .mrLightGreen { background : LightGreen; } .mrLightPink { background : LightPink; } .mrLightSalmon { background : LightSalmon; } .mrLightSeaGreen { background : LightSeaGreen; } .mrLightSkyBlue { background : LightSkyBlue; } .mrLightSlateGray { background : LightSlateGray; } .mrLightSlateGrey { background : LightSlateGrey; } .mrLightSteelBlue { background : LightSteelBlue; } .mrLightYellow { background : LightYellow; } .mrLime { background : Lime; } .mrLimeGreen { background : LimeGreen; } .mrLinen { background : Linen; } .mrMagenta { background : Magenta; } .mrMaroon { background : Maroon; } .mrMediumAquaMarine { background : MediumAquaMarine; } .mrMediumBlue { background : MediumBlue; } .mrMediumOrchid { background : MediumOrchid; } .mrMediumPurple { background : MediumPurple; } .mrMediumSeaGreen { background : MediumSeaGreen; } .mrMediumSlateBlue { background : MediumSlateBlue; } .mrMediumSpringGreen { background : MediumSpringGreen; } .mrMediumTurquoise { background : MediumTurquoise; } .mrMediumVioletRed { background : MediumVioletRed; } .mrMidnightBlue { background : MidnightBlue; } .mrMintCream { background : MintCream; } .mrMistyRose { background : MistyRose; } .mrMoccasin { background : Moccasin; } .mrNavajoWhite { background : NavajoWhite; } .mrNavy { background : Navy; } .mrOldLace { background : OldLace; } .mrOlive { background : Olive; } .mrOliveDrab { background : OliveDrab; } .mrOrange { background : Orange; } .mrOrangeRed { background : OrangeRed; } .mrOrchid { background : Orchid; } .mrPaleGoldenRod { background : PaleGoldenRod; } .mrPaleGreen { background : PaleGreen; } .mrPaleTurquoise { background : PaleTurquoise; } .mrPaleVioletRed { background : PaleVioletRed; } .mrPapayaWhip { background : PapayaWhip; } .mrPeachPuff { background : PeachPuff; } .mrPeru { background : Peru; } .mrPink { background : Pink; } .mrPlum { background : Plum; } .mrPowderBlue { background : PowderBlue; } .mrPurple { background : Purple; } .mrRebeccaPurple { background : RebeccaPurple; } .mrRed { background : Red; } .mrRosyBrown { background : RosyBrown; } .mrRoyalBlue { background : RoyalBlue; } .mraddleBrown { background : SaddleBrown; } .mralmon { background : Salmon; } .mrandyBrown { background : SandyBrown; } .mreaGreen { background : SeaGreen; } .mreaShell { background : SeaShell; } .mrienna { background : Sienna; } .mrilver { background : Silver; } .mrkyBlue { background : SkyBlue; } .mrlateBlue { background : SlateBlue; } .mrlateGray { background : SlateGray; } .mrlateGrey { background : SlateGrey; } .mrnow { background : Snow; } .mrpringGreen { background : SpringGreen; } .mrteelBlue { background : SteelBlue; } .mrTan { background : Tan; } .mrTeal { background : Teal; } .mrThistle { background : Thistle; } .mrTomato { background : Tomato; } .mrTurquoise { background : Turquoise; } .mrViolet { background : Violet; } .mrWheat { background : Wheat; } .mrWhite { background : White; } .mrWhiteSmoke { background : WhiteSmoke; } .mrYellow { background : Yellow; } .mrYellowGreen { background : YellowGreen; } 
+
+/* Colours */
+
+.mrsRetroBlue { color: rgb(103,169,168); }
+.mrsRetroYellow { color : rgb(252,238,193); }
+.mrsAliceBlue { color : AliceBlue; } .mrsAntiqueWhite { color : AntiqueWhite; } .mrsAqua { color : Aqua; } .mrsAquamarine { color : Aquamarine; } .mrsAzure { color : Azure; } .mrsBeige { color : Beige; } .mrsBisque { color : Bisque; } .mrsBlack { color : Black; } .mrsBlanchedAlmond { color : BlanchedAlmond; } .mrsBlue { color : Blue; } .mrsBlueViolet { color : BlueViolet; } .mrsBrown { color : Brown; } .mrsBurlyWood { color : BurlyWood; } .mrsCadetBlue { color : CadetBlue; } .mrsChartreuse { color : Chartreuse; } .mrsChocolate { color : Chocolate; } .mrsCoral { color : Coral; } .mrsCornflowerBlue { color : CornflowerBlue; } .mrsCornsilk { color : Cornsilk; } .mrsCrimson { color : Crimson; } .mrsCyan { color : Cyan; } .mrsDarkBlue { color : DarkBlue; } .mrsDarkCyan { color : DarkCyan; } .mrsDarkGoldenRod { color : DarkGoldenRod; } .mrsDarkGray { color : DarkGray; } .mrsDarkGrey { color : DarkGrey; } .mrsDarkGreen { color : DarkGreen; } .mrsDarkKhaki { color : DarkKhaki; } .mrsDarkMagenta { color : DarkMagenta; } .mrsDarkOliveGreen { color : DarkOliveGreen; } .mrsDarkOrange { color : DarkOrange; } .mrsDarkOrchid { color : DarkOrchid; } .mrsDarkRed { color : DarkRed; } .mrsDarkSalmon { color : DarkSalmon; } .mrsDarkSeaGreen { color : DarkSeaGreen; } .mrsDarkSlateBlue { color : DarkSlateBlue; } .mrsDarkSlateGray { color : DarkSlateGray; } .mrsDarkSlateGrey { color : DarkSlateGrey; } .mrsDarkTurquoise { color : DarkTurquoise; } .mrsDarkViolet { color : DarkViolet; } .mrsDeepPink { color : DeepPink; } .mrsDeepSkyBlue { color : DeepSkyBlue; } .mrsDimGray { color : DimGray; } .mrsDimGrey { color : DimGrey; } .mrsDodgerBlue { color : DodgerBlue; } .mrsFireBrick { color : FireBrick; } .mrsFloralWhite { color : FloralWhite; } .mrsForestGreen { color : ForestGreen; } .mrsFuchsia { color : Fuchsia; } .mrsGainsboro { color : Gainsboro; } .mrsGhostWhite { color : GhostWhite; } .mrsGold { color : Gold; } .mrsGoldenRod { color : GoldenRod; } .mrsGray { color : Gray; } .mrsGrey { color : Grey; } .mrsGreen { color : Green; } .mrsGreenYellow { color : GreenYellow; } .mrsHoneyDew { color : HoneyDew; } .mrsHotPink { color : HotPink; } .mrsIndianRed { color : IndianRed; } .mrsIndigo { color : Indigo; } .mrsIvory { color : Ivory; } .mrsKhaki { color : Khaki; } .mrsLavender { color : Lavender; } .mrsLavenderBlush { color : LavenderBlush; } .mrsLawnGreen { color : LawnGreen; } .mrsLemonChiffon { color : LemonChiffon; } .mrsLightBlue { color : LightBlue; } .mrsLightCoral { color : LightCoral; } .mrsLightCyan { color : LightCyan; } .mrsLightGoldenRodYellow { color : LightGoldenRodYellow; } .mrsLightGray { color : LightGray; } .mrsLightGrey { color : LightGrey; } .mrsLightGreen { color : LightGreen; } .mrsLightPink { color : LightPink; } .mrsLightSalmon { color : LightSalmon; } .mrsLightSeaGreen { color : LightSeaGreen; } .mrsLightSkyBlue { color : LightSkyBlue; } .mrsLightSlateGray { color : LightSlateGray; } .mrsLightSlateGrey { color : LightSlateGrey; } .mrsLightSteelBlue { color : LightSteelBlue; } .mrsLightYellow { color : LightYellow; } .mrsLime { color : Lime; } .mrsLimeGreen { color : LimeGreen; } .mrsLinen { color : Linen; } .mrsMagenta { color : Magenta; } .mrsMaroon { color : Maroon; } .mrsMediumAquaMarine { color : MediumAquaMarine; } .mrsMediumBlue { color : MediumBlue; } .mrsMediumOrchid { color : MediumOrchid; } .mrsMediumPurple { color : MediumPurple; } .mrsMediumSeaGreen { color : MediumSeaGreen; } .mrsMediumSlateBlue { color : MediumSlateBlue; } .mrsMediumSpringGreen { color : MediumSpringGreen; } .mrsMediumTurquoise { color : MediumTurquoise; } .mrsMediumVioletRed { color : MediumVioletRed; } .mrsMidnightBlue { color : MidnightBlue; } .mrsMintCream { color : MintCream; } .mrsMistyRose { color : MistyRose; } .mrsMoccasin { color : Moccasin; } .mrsNavajoWhite { color : NavajoWhite; } .mrsNavy { color : Navy; } .mrsOldLace { color : OldLace; } .mrsOlive { color : Olive; } .mrsOliveDrab { color : OliveDrab; } .mrsOrange { color : Orange; } .mrsOrangeRed { color : OrangeRed; } .mrsOrchid { color : Orchid; } .mrsPaleGoldenRod { color : PaleGoldenRod; } .mrsPaleGreen { color : PaleGreen; } .mrsPaleTurquoise { color : PaleTurquoise; } .mrsPaleVioletRed { color : PaleVioletRed; } .mrsPapayaWhip { color : PapayaWhip; } .mrsPeachPuff { color : PeachPuff; } .mrsPeru { color : Peru; } .mrsPink { color : Pink; } .mrsPlum { color : Plum; } .mrsPowderBlue { color : PowderBlue; } .mrsPurple { color : Purple; } .mrsRebeccaPurple { color : RebeccaPurple; } .mrsRed { color : Red; } .mrsRosyBrown { color : RosyBrown; } .mrsRoyalBlue { color : RoyalBlue; } .mrsSaddleBrown { color : SaddleBrown; } .mrsSalmon { color : Salmon; } .mrsSandyBrown { color : SandyBrown; } .mrsSeaGreen { color : SeaGreen; } .mrsSeaShell { color : SeaShell; } .mrsSienna { color : Sienna; } .mrsSilver { color : Silver; } .mrsSkyBlue { color : SkyBlue; } .mrsSlateBlue { color : SlateBlue; } .mrsSlateGray { color : SlateGray; } .mrsSlateGrey { color : SlateGrey; } .mrsSnow { color : Snow; } .mrsSpringGreen { color : SpringGreen; } .mrsSteelBlue { color : SteelBlue; } .mrsTan { color : Tan; } .mrsTeal { color : Teal; } .mrsThistle { color : Thistle; } .mrsTomato { color : Tomato; } .mrsTurquoise { color : Turquoise; } .mrsViolet { color : Violet; } .mrsWheat { color : Wheat; } .mrsWhite { color : White; } .mrsWhiteSmoke { color : WhiteSmoke; } .mrsYellow { color : Yellow; } .mrsYellowGreen { color : YellowGreen; } 
+		
+/* Typography */
+
+@media screen and (max-width: 1280px) { :root { font-size: 18px; } }
+@media screen and (max-width: 960px) { :root { font-size: 14px; } }
+@media screen and (max-width: 485px) {	:root { font-size: 12px; } }
+.mrMH { font-size: 1.5rem; }
+.mrMF { font-size: 0.75rem; }
+.mrMS { font-size: 0.85rem; }
+.mrH1 { font-size: 3em; }
+.mrH2 { font-size: 2.5em; }
+.mrH3 { font-size: 2em; }
+.mrH4 { font-size: 1.5em; }
+.mrH5 { font-size: 1em; }
+.mrH6 { font-size: 0.5em; }
+.mrBloody { text-shadow: 1px 1px 3px snow; }
+.mrDark { text-shadow: 3px 3px 5px darkslategrey; }
+.mrDystopian { text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff2d95, 0 0 30px #ff2d95, 0 0 40px #ff2d95, 0 0 50px #ff2d95, 0 0 75px #ff2d95; }
+.mrNice { text-shadow: 1px 1px 2px rgba(0,0,0,0.8),-1px -1px 2px black,-1px 1px 2px black,1px -1px 2px black,0 1px #808d93,1px 0 #cdd2d5,1px 2px #808d93,2px 1px #cdd2d5,2px 3px #808d93,3px 2px #cdd2d5,3px 4px #808d93,4px 3px #cdd2d5,4px 5px #808d93,5px 4px #cdd2d5,5px 6px #808d93,6px 5px #cdd2d5,6px 7px #808d93; }
+.mrPeachy { text-shadow: 0px 1px 0px #999, 0px 2px 0px #888, 0px 3px 0px #777, 0px 4px 0px #666, 0px 5px 0px #555, 0px 6px 0px #444, 0px 7px 0px #333, 0px 8px 7px #001135; }
+.mrRetro { text-shadow: 3px 3px 0px #2c2e38, 5px 5px 0px #5c5f72; }
+.mrRoddy { text-shadow: 1px 1px 0px black, -1px -1px 0px black, 1px -1px 0px black, -1px 1px 0px black; }
+.mrShady { text-shadow: 2px 2px 3px black; }
+.mrNone { text-decoration: none; }
+
+/* Boxes */
+
+.mrBox { width: calc(100vw - 17px); height : calc(100vh - 17px); overflow-y: auto; } 
+.mrBox95 { width: 95vw; height: 95vh; overflow-y: auto; position: relative; left: 2.5vw; top: 2.5vh; }
+.mrBox90 { width: 90vw; height: 90vh; overflow-y: auto; position: relative; left: 5vw; top: 5vh; }
+.mrBox85 { width: 85vw; height: 85vh; overflow-y: auto; position: relative; left: 7.5vw; top: 7.5vh; }
+.mrBox80 { width: 80vw; height: 80vh; overflow-y: auto; position: relative; left: 10vw; top: 10vh; }
+.mrBox75 { width: 75vw; height: 75vh; overflow-y: auto; position: relative; left: 12.5vw; top: 12.5vh; }
+.mrBox70 { width: 70vw; height: 70vh; overflow-y: auto; position: relative; left: 15vw; top: 15vh; }
+.mrBox65 { width: 65vw; height: 65vh; overflow-y: auto; position: relative; left: 17.5vw; top: 17.5vh; }
+.mrBox60 { width: 60vw; height: 60vh; overflow-y: auto; position: relative; left: 20vw; top: 20vh; }
+.mrBox55 { width: 55vw; height: 55vh; overflow-y: auto; position: relative; left: 22.5vw; top: 22.5vh; }
+.mrBox50 { width: 50vw; height: 50vh; overflow-y: auto; position: relative; left: 25vw; top: 25vh; }
+.mrCon95 { width: 95vw; position: relative; left: 2.5vw; }
+.mrCon90 { width: 90vw; position: relative; left: 5vw; }
+.mrCon85 { width: 85vw; position: relative; left: 7.5vw; }
+.mrCon80 { width: 80vw; position: relative; left: 10vw; }
+.mrCon75 { width: 75vw; position: relative; left: 12.5vw; }
+.mrCon70 { width: 70vw; position: relative; left: 15vw; }
+.mrCon65 { width: 65vw; position: relative; left: 17.5vw; }
+.mrCon60 { width: 60vw; position: relative; left: 20vw; }
+.mrCon55 { width: 55vw; position: relative; left: 22.5vw; }
+.mrCon50 { width: 50vw; position: relative; left: 25vw; }
+.mr1 { width: 99.99999%; float:left; padding:0; margin:0; transition: .5s; }
+.mr2 { width: 49.99999%; float:left; padding:0; margin:0; transition: .5s; }
+.mr3 { width: 33.33333%; float:left; padding:0; margin:0; transition: .5s; }
+.mr4 { width: 24.99999%; float:left; padding:0; margin:0; transition: .5s; }
+.mr5 { width: 19.99999%; float:left; padding:0; margin:0; transition: .5s; }
+.mr6 { width: 16.66666%; float:left; padding:0; margin:0; transition: .5s; }
+.mr10 { width: 9.99999%; float:left; padding:0; margin:0; transition: .5s; }
+.mr20 { width: 4.99999%; float:left; padding:0; margin:0; transition: .5s; }
+.mrR { overflow:hidden }
+.mrMinH50 { min-height: 50vh; overflow-y: auto; }
+@media screen and (max-width: 960px) { .mr1 { width: 99.99999%; } .mr2 { width: 99.99999%; } .mr3 { width: 66.66666%; } .mr4 { width: 49.99999%; } .mr5 { width: 39.99999%; } .mr6 { width: 33.33333%; } .mr10 { width: 19.99999%; } .mr20 { width: 9.99999%; } .mrCon50,.mrCon55,.mrCon60,.mrCon65,.mrCon70,.mrCon75,.mrCon80,.mrCon85,.mrCon90,.mrCon95 { width: calc(100vw - 17px); position: static; left: 0; } }
+@media screen and (max-width: 485px) { .mr1 { width: 99.99999%; } .mr2 { width: 99.99999%; } .mr3 { width: 99.99999%; } .mr4 { width: 99.99999%; } .mr5 { width: 99.99999%; } .mr6 { width: 99.99999%; } .mr10 { width: 99.99999%; } .mr20 { width: 99.99999%; } }
+.mrCreamy { box-shadow: 2px 2px 1px grey, 4px 4px 2px snow, 6px 6px 3px lavender, -3px -3px 5px lavenderblush, -3px 3px 2px navajowhite, 3px -3px 2px mintcream, inset 3px 3px 0 grey, inset -3px -3px 0 grey; }
+.mrEnamel { border-radius: 25px; box-shadow: 1px 1px 2px black, -1px -1px 2px black, 5px 5px 3px grey, inset -3px -3px 3px grey, inset 3px -3px 3px grey; }
+.mrShadow { box-shadow: 5px 5px 10px grey; }
+.mrYellowBelly { box-shadow: 2px 2px 3px black, Inset 2px 2px 51px yellow; }
+.mrTest { box-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15); }
+
+/* Positioning */
+
+.mrAbs { position : absolute; }
+.mrFix { position : fixed; }
+.mrLeft { float: left; }
+.mrMar1 { margin: 1vh; }
+.mrMar2 { margin: 2vh; }
+.mrMar3 { margin: 3vh; }
+.mrMar4 { margin: 4vh; }
+.mrMar5 { margin: 5px; }
+.mrMar10 { margin: 10px; }
+.mrMar20 { margin: 20px; }
+.mrMar30 { margin: 30px; }
+.mrMart1 { margin-top: 1vh; }
+.mrMart2 { margin-top: 2vh; }
+.mrMart3 { margin-top: 3vh; }
+.mrMart4 { margin-top: 4vh; }
+.mrMart5 { margin-top: 5px; }
+.mrMart10 { margin-top: 10px; }
+.mrMart20 { margin-top: 20px; }
+.mrMart30 { margin-top: 30px; }
+.mrMarr1 { margin-right: 1vh; }
+.mrMarr2 { margin-right: 2vh; }
+.mrMarr3 { margin-right: 3vh; }
+.mrMarr4 { margin-right: 4vh; }
+.mrMarr5 { margin-right: 5px; }
+.mrMarr10 { margin-right: 10px; }
+.mrMarr20 { margin-right: 20px; }
+.mrMarr30 { margin-right: 30px; }
+.mrMarb1 { margin-bottom: 1vh; }
+.mrMarb2 { margin-bottom: 2vh; }
+.mrMarb3 { margin-bottom: 3vh; }
+.mrMarb4 { margin-bottom: 4vh; }
+.mrMarb5 { margin-bottom: 5px; }
+.mrMarb10 { margin-bottom: 10px; }
+.mrMarb20 { margin-bottom: 20px; }
+.mrMarb30 { margin-bottom: 30px; }
+.mrMarl1 { margin-left: 1vh; }
+.mrMarl2 { margin-left: 2vh; }
+.mrMarl3 { margin-left: 3vh; }
+.mrMarl4 { margin-left: 4vh; }
+.mrMarl5 { margin-left: 5px; }
+.mrMarl10 { margin-left: 10px; }
+.mrMarl20 { margin-left: 20px; }
+.mrMarl30 { margin-left: 30px; }
+.mrPad1 { padding: 1vh; }
+.mrPad2 { padding: 2vh; }
+.mrPad3 { padding: 3vh; }
+.mrPad4 { padding: 4vh; }
+.mrPad5 { padding: 5px; }
+.mrPad10 { padding: 10px; }
+.mrPad20 { padding: 20px; }
+.mrPad30 { padding: 30px; }
+.mrPadt1 { padding-top: 1vh; }
+.mrPadt2 { padding-top: 2vh; }
+.mrPadt3 { padding-top: 3vh; }
+.mrPadt4 { padding-top: 4vh; }
+.mrPadt5 { padding-top: 5px;}
+.mrPadt10 { padding-top: 10px; }
+.mrPadt20 { padding-top: 20px; }
+.mrPadt30 { padding-top: 30px; }
+.mrPadr1 { padding-right: 1vh; }
+.mrPadr2 { padding-right: 2vh; }
+.mrPadr3 { padding-right: 3vh; }
+.mrPadr4 { padding-right: 4vh; }
+.mrPadr5 { padding-right: 5px; }
+.mrPadr10 { padding-right: 10px; }
+.mrPadr20 { padding-right: 20px; }
+.mrPadr30 { padding-right: 30px; }
+.mrPadb1 { padding-bottom: 1vh; }
+.mrPadb2 { padding-bottom: 2vh; }
+.mrPadb3 { padding-bottom: 3vh; }
+.mrPadb4 { padding-bottom: 4vh; }
+.mrPadb5 { padding-bottom: 5px; }
+.mrPadb10 { padding-bottom: 10px; }
+.mrPadb20 { padding-bottom: 20px; }
+.mrPadb30 { padding-bottom: 30px; }
+.mrPadl1 { padding-left: 1vh; }
+.mrPadl2 { padding-left: 2vh; }
+.mrPadl3 { padding-left: 3vh; }
+.mrPadl4 { padding-left: 4vh; }
+.mrPadl5 { padding-left: 5px; }
+.mrPadl10 { padding-left: 10px; }
+.mrPadl20 { padding-left: 20px; }
+.mrPadl30 { padding-left: 30px; }
+.mrRel { position: relative; }
+.mrRight { float: right; }
+.mrStat { position: static; }
+.mrTxtC { text-align: center; }
+.mrTxtL { text-align: left; }
+.mrTxtR { text-align: right; }
+
+/* Animations */
+
+@-webkit-keyframes drShrink { from { transform: scale(1); } 50% { transform: scale(0.9); } to { transform: scale(1); } } 
+@keyframes drShrink { from { transform: scale(1); } 50% { transform: scale(0.9); } to { transform: scale(1); } }
+.mrShrink { transition: .1s; }
+.mrShrink:hover { -webkit-animation : drShrink 2s ease-in-out infinite; animation: drShrink 2s ease-in-out infinite; }
+@-webkit-keyframes drExpand { from { transform: scale(1); } 50% { transform: scale(0.9); } to { transform: scale(1); } } 
+@keyframes drExpand { from { transform: scale(1); } 50% { transform: scale(1.1); } to { transform: scale(1); } }
+.mrExpand { transition: .1s; }
+.mrExpand:hover { -webkit-animation : drExpand 2s ease-in-out infinite; animation: drExpand 2s ease-in-out infinite; }
+@-webkit-keyframes drFlow { from { background-position: 0% 0%; } 50% { background-position: 100% 100%; } to { background-position: 0% 0%; } }
+@keyframes drFlow { from { background-position: 0% 0%; } 50% { background-position: 100% 100%; } to { background-position: 0% 0%; } }
+.mrFlow { -webkit-animation : drFlow 30s ease-in-out infinite; animation: drFlow 30s ease-in-out infinite; }
+.mrFlowIt { background-position: 0% 0%; }
+.mrFlower { transition: .1s; }
+.mrFlower:hover { -webkit-animation : drFlow 30s ease-in-out infinite; animation: drFlow 30s ease-in-out infinite; } 
+@-webkit-keyframes drSlidey { 0% { opacity: 0; margin-top: 0; } 50% { opacity: 0.5; margin-top: 10px; } 100% { opacity: 1; margin-top: initial; } }
+@keyframes drSlidey { 0% { opacity: 0; margin-top: 0; } 50% { opacity: 0.5; margin-top: 10px; } 100% { opacity: 1; margin-top: initial; } }
+.mrSlidey { -webkit-animation : drSlidey 0.5s 1; animation: drSlidey 0.5s 1; } 
+@-webkit-keyframes drBounceIn { 0%, 20%, 40%, 60%, 80%, 100% { -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); } 0% { opacity: 0; -webkit-transform: scale3d(.3, .3, .3); transform: scale3d(.3, .3, .3); } 20% { -webkit-transform: scale3d(1.1, 1.1, 1.1); transform: scale3d(1.1, 1.1, 1.1); } 40% { -webkit-transform: scale3d(.9, .9, .9); transform: scale3d(.9, .9, .9); } 60% { opacity: 1; -webkit-transform: scale3d(1.03, 1.03, 1.03); transform: scale3d(1.03, 1.03, 1.03); } 80% { -webkit-transform: scale3d(.97, .97, .97); transform: scale3d(.97, .97, .97); } 100% { opacity: 1; -webkit-transform: scale3d(1, 1, 1); transform: scale3d(1, 1, 1); } } 
+@keyframes drBounceIn { 0%, 20%, 40%, 60%, 80%, 100% { -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); } 0% { opacity: 0; -webkit-transform: scale3d(.3, .3, .3); transform: scale3d(.3, .3, .3); } 20% { -webkit-transform: scale3d(1.1, 1.1, 1.1); transform: scale3d(1.1, 1.1, 1.1); } 40% { -webkit-transform: scale3d(.9, .9, .9); transform: scale3d(.9, .9, .9); } 60% { opacity: 1; -webkit-transform: scale3d(1.03, 1.03, 1.03); transform: scale3d(1.03, 1.03, 1.03); } 80% { -webkit-transform: scale3d(.97, .97, .97); transform: scale3d(.97, .97, .97); } 100% { opacity: 1; -webkit-transform: scale3d(1, 1, 1); transform: scale3d(1, 1, 1); } } 
+.mrBounceIn { -webkit-animation-name: drBounceIn; animation-name: drBounceIn; -webkit-animation-duration: 1s; animation-duration: 1s; } 
+@-webkit-keyframes drBounceInDown { 0%, 60%, 75%, 90%, 100% { -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); } 0% { opacity: 0; -webkit-transform: translate3d(0, -3000px, 0); transform: translate3d(0, -3000px, 0); } 60% { opacity: 1; -webkit-transform: translate3d(0, 25px, 0); transform: translate3d(0, 25px, 0); } 75% { -webkit-transform: translate3d(0, -10px, 0); transform: translate3d(0, -10px, 0); } 90% { -webkit-transform: translate3d(0, 5px, 0); transform: translate3d(0, 5px, 0); } 100% { -webkit-transform: none; transform: none; } } 
+@keyframes drBounceInDown { 0%, 60%, 75%, 90%, 100% { -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); } 0% { opacity: 0; -webkit-transform: translate3d(0, -3000px, 0); transform: translate3d(0, -3000px, 0); } 60% { opacity: 1; -webkit-transform: translate3d(0, 25px, 0); transform: translate3d(0, 25px, 0); } 75% { -webkit-transform: translate3d(0, -10px, 0); transform: translate3d(0, -10px, 0); } 90% { -webkit-transform: translate3d(0, 5px, 0); transform: translate3d(0, 5px, 0); } 100% { -webkit-transform: none; transform: none; } } 
+.mrBounceInDown { -webkit-animation-name: drBounceInDown; animation-name: drBounceInDown; -webkit-animation-duration: 1s; animation-duration: 1s; } 
+@-webkit-keyframes drBounceInRight { 0%, 60%, 75%, 90%, 100% { -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); } 0% { opacity: 0; -webkit-transform: translate3d(3000px, 0, 0); transform: translate3d(3000px, 0, 0); } 60% { opacity: 1; -webkit-transform: translate3d(-25px, 0, 0); transform: translate3d(-25px, 0, 0); } 75% { -webkit-transform: translate3d(10px, 0, 0); transform: translate3d(10px, 0, 0); } 90% { -webkit-transform: translate3d(-5px, 0, 0); transform: translate3d(-5px, 0, 0); } 100% { -webkit-transform: none; transform: none; } } 
+@keyframes drBounceInRight { 0%, 60%, 75%, 90%, 100% { -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); } 0% { opacity: 0; -webkit-transform: translate3d(3000px, 0, 0); transform: translate3d(3000px, 0, 0); } 60% { opacity: 1; -webkit-transform: translate3d(-25px, 0, 0); transform: translate3d(-25px, 0, 0); } 75% { -webkit-transform: translate3d(10px, 0, 0); transform: translate3d(10px, 0, 0); } 90% { -webkit-transform: translate3d(-5px, 0, 0); transform: translate3d(-5px, 0, 0); } 100% { -webkit-transform: none; transform: none; } } 
+.mrBounceInRight { -webkit-animation-name: drBounceInRight; animation-name: drBounceInRight; -webkit-animation-duration: 1s; animation-duration: 1s; } 
+@-webkit-keyframes drBounceInUp { 0%, 60%, 75%, 90%, 100% { -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); } 0% { opacity: 0; -webkit-transform: translate3d(0, 3000px, 0); transform: translate3d(0, 3000px, 0); } 60% { opacity: 1; -webkit-transform: translate3d(0, -20px, 0); transform: translate3d(0, -20px, 0); } 75% { -webkit-transform: translate3d(0, 10px, 0); transform: translate3d(0, 10px, 0); } 90% { -webkit-transform: translate3d(0, -5px, 0); transform: translate3d(0, -5px, 0); } 100% { -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); } } 
+@keyframes drBounceInUp { 0%, 60%, 75%, 90%, 100% { -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); } 0% { opacity: 0; -webkit-transform: translate3d(0, 3000px, 0); transform: translate3d(0, 3000px, 0); } 60% { opacity: 1; -webkit-transform: translate3d(0, -20px, 0); transform: translate3d(0, -20px, 0); } 75% { -webkit-transform: translate3d(0, 10px, 0); transform: translate3d(0, 10px, 0); } 90% { -webkit-transform: translate3d(0, -5px, 0); transform: translate3d(0, -5px, 0); } 100% { -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); } } 
+.mrBounceInUp { -webkit-animation-name: drBounceInUp; animation-name: drBounceInUp; -webkit-animation-duration: 1s; animation-duration: 1s; }
+@-webkit-keyframes drBounceInLeft { 0%, 60%, 75%, 90%, 100% { -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); } 0% { opacity: 0; -webkit-transform: translate3d(-3000px, 0, 0); transform: translate3d(-3000px, 0, 0); } 60% { opacity: 1; -webkit-transform: translate3d(25px, 0, 0); transform: translate3d(25px, 0, 0); } 75% { -webkit-transform: translate3d(-10px, 0, 0); transform: translate3d(-10px, 0, 0); } 90% { -webkit-transform: translate3d(5px, 0, 0); transform: translate3d(5px, 0, 0); } 100% { -webkit-transform: none; transform: none; } } 
+@keyframes drBounceInLeft { 0%, 60%, 75%, 90%, 100% { -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000); } 0% { opacity: 0; -webkit-transform: translate3d(-3000px, 0, 0); transform: translate3d(-3000px, 0, 0); } 60% { opacity: 1; -webkit-transform: translate3d(25px, 0, 0); transform: translate3d(25px, 0, 0); } 75% { -webkit-transform: translate3d(-10px, 0, 0); transform: translate3d(-10px, 0, 0); } 90% { -webkit-transform: translate3d(5px, 0, 0); transform: translate3d(5px, 0, 0); } 100% { -webkit-transform: none; transform: none; } }  
+.mrBounceInLeft { -webkit-animation-name: drBounceInLeft; animation-name: drBounceInLeft; -webkit-animation-duration: 1s; animation-duration: 1s; }
+@-webkit-keyframes drFadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes drFadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+.mrFadeIn { -webkit-animation-name: drFadeIn; animation-name: drFadeIn; -webkit-animation-duration: 2s; animation-duration: 2s; opacity: 1; }
+@-webkit-keyframes drFadeOut { 0% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes drFadeOut { 0% { opacity: 1; } 100% { opacity: 0; } }
+.mrFadeOut { -webkit-animation-name: drFadeOut; animation-name: drFadeOut; -webkit-animation-duration: 2s; animation-duration: 2s; opacity: 0; }
+@-webkit-keyframes drLeftRight { from { background-position: left; } to { background-position: right; } } 
+@keyframes drLeftRight { from { background-position: left; } to { background-position: right; } }
+.mrLeftRight { background-position:left; -webkit-animation: drLeftRight 30s; -webkit-animation-timing-function: linear; -webkit-animation-delay: 2s; -webkit-animation-iteration-count: infinite; -webkit-animation-direction: alternate; -webkit-animation-play-state: running; animation: drLeftRight 30s; animation-timing-function: linear; animation-delay: 2s; animation-iteration-count: infinite; animation-direction: alternate; animation-play-state: running; background-position: left; } 
+@-webkit-keyframes drRightLeft { from { background-position: right; } to { background-position: left; } } 
+@keyframes drRightLeft { from { background-position: right; } to { background-position: left; } }
+.mrRightLeft { background-position:left; -webkit-animation: drRightLeft 30s; -webkit-animation-timing-function: linear; -webkit-animation-delay: 2s; -webkit-animation-iteration-count: infinite; -webkit-animation-direction: alternate; -webkit-animation-play-state: running; animation: drRightLeft 30s; animation-timing-function: linear; animation-delay: 2s; animation-iteration-count: infinite; animation-direction: alternate; animation-play-state: running; background-position: right; }
+
+/* Icons */
+
+.mrMagnify { display: inline-block; width: 0.4em; height: 0.4em; border: 0.1em solid black; position: relative; border-radius: 0.35em; }
+.mrMagnify::before { content: ""; display: inline-block; position: absolute; right: -0.25em; bottom: -0.1em; border-width: 0; background: black; width: 0.35em; height: 0.08em; -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); -o-transform: rotate(45deg); }
+
+
