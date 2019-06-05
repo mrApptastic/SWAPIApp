@@ -1,0 +1,20 @@
+:root {
+	--bg-back: url("../../Media/starry-sky-1152539.jpg");
+  }
+
+  /*
+@font-face { 
+	font-family: 'StarWars'; 
+	src: url("/Media/") format('woff'), url('Fonts/baarsrg_.ttf') format('truetype');
+}
+*/
+
+body {
+	background: var(--bg-back);    
+    }
+
+#topHeader {
+	background: url("../../Media/star-wars.jpg");
+	min-height: 400px;
+	background-size: auto 100%;
+}
