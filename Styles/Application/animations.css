@@ -1,0 +1,27 @@
+@-webkit-keyframes disappear {
+  to { 
+  	height: 0;
+  }
+}
+@-moz-keyframes disappear {
+  to { 
+  	height: 0;
+  }
+}
+@-o-keyframes disappear {
+  to { 
+  	height: 0;
+  }
+}
+@keyframes disappear {
+  to { 
+  	height: 0;
+  }
+}
+
+#StarWarsTextContainer {
+  -webkit-animation: disappear 50s linear 1;
+  -moz-animation:    disappear 50s linear 1;
+  -o-animation:      disappear 50s linear 1;
+  animation:         disappear 50s linear 1;
+}

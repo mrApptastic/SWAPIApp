@@ -1,20 +1,228 @@
+/* Base Properties */
 :root {
-	--bg-back: url("../../Media/starry-sky-1152539.jpg");
+	--main-background: url("../../Media/background.jpg");
+	--main-color-1 : #C6BA73;
+	--main-color-2 : #DEAA7B;
+	--main-color-3 : #8C5D8C;
+	--main-color-4 : #7B555A;
+	--main-color-5 : #315194;
+	--main-color-6 : #6B8ECE;
+	--main-color-7 : #392C10;
+	--main-color-8 : #F7FFF7;
+	--main-color-9 : #31348C;
+	--main-color-10 : #AD7D4A;
+	--main-color-11 : #943029;
+	--main-color-12 : #949A42;
+	--main-color-13 : #D6DB8C;
+	--main-color-14 : #D6DB8C;
+	--main-color-15 : #212852;	
   }
 
-  /*
+/* Fonts */ 
 @font-face { 
 	font-family: 'StarWars'; 
-	src: url("/Media/") format('woff'), url('Fonts/baarsrg_.ttf') format('truetype');
+	src: url("../../Fonts/StarWars.woff") format('woff'), url('../../Fonts/StarWars.ttf') format('truetype');
 }
-*/
+
+@font-face { 
+	font-family: 'GalaxyFarAway'; 
+	src: url("../../Fonts/galaxyfaraway.woff") format('woff'), url('../../Fonts/galaxyfaraway.ttf') format('truetype');
+}
+
+@font-face { 
+	font-family: 'DistantGalaxyOutline'; 
+	src: url("../../Fonts/SFDistantGalaxyOutline.woff") format('woff'), url('../../Fonts/SFDistantGalaxyOutline.ttf') format('truetype');
+}
+
+@font-face { 
+	font-family: 'DeathStar'; 
+	src: url("../../Fonts/Death-Star.woff") format('woff'), url('../../Fonts/Death-Star.ttf') format('truetype');
+}
+
+/* Backgrounds */
 
 body {
-	background: var(--bg-back);    
-    }
+	background: var(--main-background);    
+}
 
-#topHeader {
-	background: url("../../Media/star-wars.jpg");
+/* Typography */
+
+h1 {
+	font-family: 'DistantGalaxyOutline', sans-serif; 
+	color: var(--main-color-1);
+	font-weight: bolder;
+	font-size: 3em;
+	text-align: center;  
+}
+
+footer {
+	background: url("../../Media/Star-Wars-Footer.jpg");
 	min-height: 400px;
 	background-size: auto 100%;
+	bottom: 0;
+	position: relative;
 }
+
+/* Star Wars Icons */
+
+.starIcon {
+	font-family: 'GalaxyFarAway', sans-serif; 
+}
+
+.fa {
+	color: var(--main-color-1);
+}
+
+/* Spinner */
+
+mrSpin {
+	align-items: center;
+	justify-content: center;
+	display: flex;
+}
+
+/* Placeholders */
+
+::placeholder {
+  	font-family: 'DeathStar', sans-serif;
+  	color: var(--main-color-3);
+  	opacity: 1;
+  	font-size: 1em; 
+}
+
+:-ms-input-placeholder {
+  	font-family: 'DeathStar', sans-serif;
+  	color: var(--main-color-3);
+  	opacity: 1;
+  	font-size: 1em; 
+}
+
+::-ms-input-placeholder {
+  	font-family: 'DeathStar', sans-serif;
+  	color: var(--main-color-3);
+  	opacity: 1;
+  	font-size: 1em; 
+}
+
+/* Input */
+
+select, input {
+	font-family: 'DeathStar', sans-serif;
+	color: var(--main-color-3);
+}
+/* Navigation */
+
+.navbar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1000;  
+  background: var(--main-background);   
+}
+
+nav {
+	font-family: 'DeathStar', sans-serif; 
+	top:0; 
+	position:sticky;
+	z-index: 9999999;	
+}
+
+nav a {
+	color: var(--main-color-1);
+}
+
+nav a:hover {
+	color: var(--main-color-2);
+}
+
+.navbar .nav-item > .nav-link.active  {
+    color: var(--main-color-2);
+}
+
+/* Tables */
+
+.table thead tr th {
+
+	font-family: 'DistantGalaxyOutline', sans-serif;
+	color: var(--main-color-1);
+	font-weight: bolder;
+	font-size: 1em; 
+}
+
+.table tbody tr td {
+	font-family: 'DeathStar', sans-serif;
+	color: var(--main-color-1);
+	font-size: 1em; 
+}
+
+.table tbody tr:hover {
+	cursor: pointer;
+}
+
+.table tbody tr:hover td {
+	color: var(--main-color-2);
+}
+
+.table td, .table th {
+	border: none;
+}
+
+.pagination-sm {
+	align-items: center;
+	justify-content: center;
+}
+
+.pagination-sm li {
+		font-family: 'DeathStar', sans-serif;
+		font-size: 1em; 
+		padding-left: 0.5em;
+}
+
+.pagination-sm li a {
+			color: var(--main-color-1);
+}
+
+.pagination-sm li a:hover {
+			color: var(--main-color-2);
+}
+
+/* Modals */
+.modal-content {
+	background: var(--main-color-8);
+	font-family: 'DeathStar', sans-serif;
+	color: var(--main-color-7);
+}
+
+.modal-content .modal-header {
+	font-size: 1.25em; 
+}
+
+.modal-content .modal-header .close .fa {
+	color: var(--main-color-7);
+}
+
+.modal-content .modal-body {
+	font-size: 1em; 
+}
+
+.modal-content .modal-body .table tbody tr td {
+	color: var(--main-color-7);
+}
+
+.StarWarsBox {
+	height: 200px;
+	width: 100%;
+	text-align: center;
+	padding-top: 90px;
+}
+
+.StarBox-1 {
+	color: var(--main-color-1);
+	background: var(--main-color-2);
+}
+
+/* Audio Tag Style for Web-Kit */
+audio::-webkit-media-controls-panel {
+	background: var(--main-color-1);
+}
+

@@ -32,14 +32,14 @@ starWarsText.directive('starWarsText', function () {
   }
 }
 </style>
-<div class="fade"></div>
+
 
 <section style="
 display: flex;
 justify-content: center;
 position: relative;
 height: 400px;
-color: #feda4a;
+color: #C6BA73;
 font-family: 'Pathway Gothic One', sans-serif;
 font-size: 500%;
 font-weight: 600;

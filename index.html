@@ -4,33 +4,130 @@
   <title>Star Wars Demo Application</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <meta name="Description" content="Star Wars Test" />
+  <meta name="Robots" content="Noindex, Nofollow" />
+  <link rel="icon" 
+      type="image/png" 
+      href="Media/Stormtrooper.png">
+  <link rel="stylesheet" href="Styles/Libraries/bootstrap.css" />
+    <link rel="stylesheet" href="Styles/Libraries/font-awesome.css" />
   <link rel="stylesheet" href="Styles/Libraries/mrStyle.css" />
+  <link rel="stylesheet" href="Styles/Libraries/toastr.css" />
   <link rel="stylesheet" href="Styles/Application/main.css" />
   <link rel="stylesheet" href="Styles/Application/animations.css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="Scripts/Libraries/angular.js"></script>
+  <script src="Scripts/Libraries/angular-route.js"></script>
+  <script src="Scripts/Libraries/angular-animate.js"></script>
+  <script src="Scripts/Libraries/jQuery.js"></script>
+  <script src="Scripts/Libraries/popper.js"></script>
+  <script src="Scripts/Libraries/bootstrap.js"></script>
+  <script src="Scripts/Libraries/moment.js"></script>
+  <script src="Scripts/Libraries/toastr.js"></script>
   <script src="Scripts/Libraries/mrMr.js"></script>
-
+  <script src="Scripts/Libraries/ui-bootstrap.js"></script>
+  <script src="Scripts/Libraries/mrSnakey.js"></script>
+  <script src="Scripts/Libraries/captainCanvas.js"></script>
+  <script src="Scripts/Libraries/dataHussar.js"></script>
 </head>
 <body>
-<div class="container-fluid">
-	<div id="topHeader">
-
-	</div>
+    <nav class="navbar navbar-expand-md">
+        <a class="navbar-brand" href="#">
+          <span class="starIcon">S</span>                    
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#!/characters">
+                <span class="starIcon">F&nbsp;</span>
+                Characters
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/species">
+                <span class="starIcon">Y&nbsp;</span>
+                Species
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!/vehicles">
+                <span class="starIcon">A&nbsp;</span>
+                Vehicles
+              </a>
+            </li>    
+            <li class="nav-item">
+              <a class="nav-link" href="#!/starships">
+                <span class="starIcon">G&nbsp;</span>
+                Starships
+              </a>
+            </li>   
+            <li class="nav-item">
+              <a class="nav-link" href="#!/planets">
+                <span class="starIcon">E&nbsp;</span>
+                Planets
+              </a>
+            </li>  
+            <li class="nav-item">
+              <a class="nav-link" href="#!/movies">
+                <span class="starIcon">D&nbsp;</span>
+                Films
+              </a>
+            </li>  
+            <li class="nav-item">
+              <a class="nav-link" href="#!/stats">
+                <span class="starIcon">3&nbsp;</span>
+                Statistics
+              </a>
+            </li>  
+            <li class="nav-item">
+              <a class="nav-link" href="#!/funstuff">
+                <span class="starIcon">1&nbsp;</span>
+                Fun Stuff
+              </a>
+            </li>  
+          </ul>
+          <ul>
+            <li class="nav-item">
+              <audio controls autoplay>
+                <source src="Media/Music/Star-Wars-Medley.ogg" type="audio/ogg">
+                <source src="Media/Music/Star-Wars-Medley.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio> 
+            </li>   
+          </ul>
+        </div>
+      </nav>  
+<div>    
+<header id="carouselExampleControls" style="z-index: 1;" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="Media/Slide-1.jpg" alt="Star Wars">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="Media/Slide-2.jpg" alt="Star Wars">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="Media/Slide-3.jpg" alt="Star Wars">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="Media/Slide-4.jpg" alt="Star Wars">
+    </div>
+  </div>
+</header>
+<div class="container-fluid" style="z-index: 999; position: relative;background: black;">
+  <br/>
+  <h1>
+    Star Wars Demo Application
+  </h1>
+</div>
+<div class="container">
   <div ng-view>
-    Henter data...
+    <mrspin color="#C6BA73" size="100"></mrspin>
+  </div>
 </div>
-</div>
-<div class="container">
-<star-wars-text title="Hej hej" sub-title="Hej huha" lines="<p>Hej</p><p>heja</p>"></star-wars-text>
-</div>
-<div class="container">
-dgrg
+<footer></footer>
 </div>
 <script src="Scripts/Application/starWarsApp.js"></script>
 <script src="Scripts/Application/starWarsText.js"></script>
