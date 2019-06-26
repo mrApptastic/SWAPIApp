@@ -1,6 +1,6 @@
 var starWarsApp = angular.module("starWarsApp", ["ngRoute", "ngAnimate", "starWarsText", "mrMr", "ui.bootstrap"]);
 
-var appVersion = 1;
+var appVersion = 1.01;
 
 starWarsApp.run(function ($rootScope) {
     /* Quick fix for global scope issue when changing page */
@@ -66,17 +66,25 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
              <table class="table">
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Height</th>
-                    <th>Weight</th>
-                    <th>Gender</th>
+                    <th>
+                      <mrsort lbl="Name" srt="name"></mrsort>
+                    </th>
+                    <th>
+                      <mrsort lbl="Height" srt="height"></mrsort>
+                    </th>
+                    <th>
+                      <mrsort lbl="Weight" srt="mass"></mrsort>
+                    </th>
+                    <th>
+                      <mrsort lbl="Gender" srt="gender"></mrsort>
+                    </th>
                     <th>Age</th>
                     <th>BMI</th>
                     <th>BMR</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="character in characters" data-toggle="modal" data-target="#characterModal" ng-click="changeCharacter(character)">
+                  <tr ng-repeat="character in characters | orderBy : sortOrder : sortDirection" data-toggle="modal" data-target="#characterModal" ng-click="changeCharacter(character)">
                     <td ng-bind="character.name"></td>
                     <td ng-bind="character.height"></td>
                     <td ng-bind="character.mass"></td>
@@ -127,7 +135,11 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
                           <tr>
                             <td>Skin</td>
                             <td ng-bind="selectedCharacter.skin_color"></td>
-                          </tr>                                                                                          
+                          </tr>    
+                          <tr>
+                          <td>Total Films</td>
+                          <td ng-bind="selectedCharacter.films.length"></td>
+                        </tr>                                                                                        
                         </tbody
                       </table>
                     </div>
@@ -450,18 +462,37 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
         .when("/funstuff", {
             template: `
             <div class="container-fluid" id="mrSnakeyContainer">
-            <canvas id="mrSnakey"></canvas>
-            <canvas id="canvasBanditten" style="background: url('Media/MosEisley-celebration.png'); background-position: center top; background-size: auto 100%"></canvas>
-            <div id="toolUha" style="width: calc(100% + 30px);background: var(--main-color-1);padding: 5px;"></div>
+              <ul class="nav nav-tabs">
+                <li class="nav-item pointer" ng-click="selectedGame = 1;snakeInit();">
+                  <a class="nav-link" ng-class="selectedGame ==1 ? 'active' : ''">Starry Snake</a>
+                </li>
+                <li class="nav-item pointer" ng-click="selectedGame = 2;rectInit();">
+                  <a class="nav-link" ng-class="selectedGame == 2 ? 'active' : ''">Star Pong</a>
+                </li>
+                <li class="nav-item pointer" ng-click="selectedGame = 3;paintInit();">
+                  <a class="nav-link" ng-class="selectedGame == 3 ? 'active' : ''">Paint Mos Eisley</a>
+                </li>
+              </ul>
+              <div ng-show="selectedGame === 1;"> 
+                <canvas id="mrSnakey"></canvas>
+              </div>
+              <div ng-show="selectedGame === 2"> 
+                <canvas id="mrRect" style="background-color: #392C10 !important;"></canvas>
+              </div>
+              <div ng-show="selectedGame === 3"> 
+                <div class="row">
+                  <div class="col-md-9">
+                    <canvas id="canvasBanditten" style="background: url('Media/MosEisley-celebration.png'); background-position: center top; background-size: auto 100%"></canvas>
+                  </div>
+                  <div class="col-md-3">
+                    <div id="toolUha" style="height: 100%; width: calc(100% + 30px);background: var(--main-color-1);padding: 5px;"></div>
+                  </div>                
+                </div>
+              </div>
             </div>
         `,  
             controller: "funController"
-        });
-        //.when("/news", {
-        //    templateUrl: "/Home/News?v=" + appVersion,
-        //    controller: "newsController"
-        //});
-        
+        });     
 
 }]);
 
@@ -602,15 +633,29 @@ starWarsApp.controller("statController", ["$scope", "$rootScope", "dataService",
 
 starWarsApp.controller("funController", ["$scope", "$rootScope", "$rootScope", function ($scope, $rootScope, $rootScope) {
     $rootScope.refresh();
+    $scope.selectedGame = 1;
+
     setTimeout(function() {
-        var baseWidth = document.getElementById("mrSnakeyContainer").offsetWidth;
-        var ib = new mrSnakey("mrSnakey", 
-                              baseWidth, 
-                              (baseWidth * 2/3));
-        var bo = new captainCanvas("canvasBanditten", "toolUha");
-        document.getElementById("canvasBanditten").width = baseWidth;
-        document.getElementById("canvasBanditten").height = baseWidth * 2/3;
+        $scope.baseHeight = window.innerHeight - 125;
+        $scope.baseWidth = document.getElementById("mrSnakeyContainer").offsetWidth;
+        $scope.snakeInit();
     }, 0);
+    $scope.snakeInit = function () {
+      var ib = new mrSnakey("mrSnakey", 
+      $scope.baseWidth, 
+      $scope.baseHeight);
+    };
+    $scope.rectInit = function () {
+      var per = new rectAngular("mrRect", 
+      $scope.baseWidth, 
+      $scope.baseHeight);
+    };
+    $scope.paintInit = function () {
+      document.getElementById("toolUha").innerHTML = "";
+      var bo = new captainCanvas("canvasBanditten", "toolUha");
+      document.getElementById("canvasBanditten").width = $scope.baseWidth;
+      document.getElementById("canvasBanditten").height = $scope.baseHeight;      
+    };
 }]);
 
 starWarsApp.service("errorService", ["messageService", function (messageService) {
@@ -793,6 +838,7 @@ starWarsApp.service("dataService", ["$http", "messageService", "errorService", f
     };
 
     /* jQuery Code for handling active classes on click */
+    
     $('.navbar-nav .nav-link').click(function(){
         $('.navbar-nav .nav-link').removeClass('active');
         $(this).addClass('active');

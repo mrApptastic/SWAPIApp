@@ -131,6 +131,10 @@ nav a {
 	color: var(--main-color-1);
 }
 
+.nav-link {
+	font-size: 0.9rem;
+}
+
 nav a:hover {
 	color: var(--main-color-2);
 }
@@ -138,6 +142,17 @@ nav a:hover {
 .navbar .nav-item > .nav-link.active  {
     color: var(--main-color-2);
 }
+
+.nav-tabs {
+	border-bottom: none;
+	font-family: 'DeathStar', sans-serif;
+}
+
+.nav-tabs li {
+	color: var(--main-color-1);
+	background: var(--main-color-7);
+}
+
 
 /* Tables */
 
@@ -226,3 +241,10 @@ audio::-webkit-media-controls-panel {
 	background: var(--main-color-1);
 }
 
+.pointer {
+	cursor: pointer;
+}
+
+#toolUha * {
+	font-family: 'DeathStar', sans-serif;
+}

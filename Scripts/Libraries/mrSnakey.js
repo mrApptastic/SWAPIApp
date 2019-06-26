@@ -5,9 +5,9 @@
 	mrS.set = { wdt : (width ? width : 800), hgt : (height ? height : 800) };
 	mrS.pen = { x : 5, y : 5, mX : true, mY : true, size : 5, step: 1, speed : 5, shift : 500, animation : null, count : 0, path : [] };
 	mrS.setBackground = function () {
-		mrS.ctx.fillStyle = "rgb(165,165,255)"; 
+		mrS.ctx.fillStyle = "#392C10"; 
 		mrS.ctx.fillRect(0,0,mrS.set.wdt,mrS.set.hgt); 
-		mrS.ctx.fillStyle = "rgb(66,66,231)";
+		mrS.ctx.fillStyle = "#C6BA73";
 	};
 	mrS.setStartScreen = function () {
 		var offsetX = mrS.set.wdt / 20; 
@@ -17,9 +17,9 @@
 		var highscore = mrS.getHighScore();	
 		mrS.setBackground();			
 		mrS.ctx.fillRect(offsetX,offsetX,mrS.set.wdt - 2 * offsetX,mrS.set.hgt - 2 * offsetY);
-		mrS.ctx.fillText("mrSnakey", middle - 100, 30); 
-		mrS.ctx.fillStyle = "rgb(165,165,255)";
-		mrS.ctx.fillText("Press any key to start...", middle - 200, row * 4);
+		mrS.ctx.fillText("Starry Starry Snake", middle - 160, 30); 
+		mrS.ctx.fillStyle = "#392C10";
+		mrS.ctx.fillText("Press enter to start...", middle - 200, row * 4);
 		for (let i = 0; i < highscore.length; i++) {
 			mrS.ctx.fillText(i + 1 + "- " + highscore[i].Score + " - " + highscore[i].Name, middle - 250, row * (6 + i *2));
 		}
@@ -105,12 +105,12 @@
 		if (height) {
 			mrS.elm.height = mrS.set.hgt;
 		}
-		mrS.ctx.font = "30px Verdana"; 
-		mrS.ctx.strokeStyle = "rgb(66,66,231)"; 
+		mrS.ctx.font = "30px 'DeathStar'";
+		mrS.ctx.strokeStyle = "#C6BA73"; 
 		mrS.setStartScreen();
 		window.onkeydown = function (e) {
 			e.preventDefault();			
-			if (!mrS.pen.animation) {
+			if (!mrS.pen.animation && e.keyCode === 13) {
 				mrS.startGame();
 			}			
 			switch (e.keyCode) {
