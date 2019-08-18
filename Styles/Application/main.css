@@ -19,6 +19,7 @@
   }
 
 /* Fonts */ 
+/*
 @font-face { 
 	font-family: 'StarWars'; 
 	src: url("../../Fonts/StarWars.woff") format('woff'), url('../../Fonts/StarWars.ttf') format('truetype');
@@ -38,6 +39,7 @@
 	font-family: 'DeathStar'; 
 	src: url("../../Fonts/Death-Star.woff") format('woff'), url('../../Fonts/Death-Star.ttf') format('truetype');
 }
+*/
 
 /* Backgrounds */
 
