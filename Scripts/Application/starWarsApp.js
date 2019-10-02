@@ -1,6 +1,6 @@
 var starWarsApp = angular.module("starWarsApp", ["ngRoute", "ngAnimate", "starWarsText", "mrMr", "ui.bootstrap"]);
 
-var appVersion = 1.01;
+var appVersion = 1.02;
 
 starWarsApp.run(function ($rootScope) {
     /* Quick fix for global scope issue when changing page */
@@ -86,8 +86,8 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
                 <tbody>
                   <tr ng-repeat="character in characters | orderBy : sortOrder : sortDirection" data-toggle="modal" data-target="#characterModal" ng-click="changeCharacter(character)">
                     <td ng-bind="character.name"></td>
-                    <td ng-bind="character.height"></td>
-                    <td ng-bind="character.mass"></td>
+                    <td ng-bind="character.height | starNumber"></td>
+                    <td ng-bind="character.mass | starNumber"></td>
                     <td class="text-center">
                         <i class="fa" ng-class="character.gender == 'female' ? 'fa-venus' : 'fa-mars'" aria-hidden="true"></i>
                     </td>
@@ -190,7 +190,7 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
            <tbody>
              <tr ng-repeat="specie in species | orderBy : sortOrder : sortDirection" data-toggle="modal" data-target="#specieModal" ng-click="changeSpecie(specie)">
                <td ng-bind="specie.name"></td>
-               <td ng-bind="specie.average_lifespan"></td>
+               <td ng-bind="specie.average_lifespan | starNumber"></td>
                <td ng-bind="specie.language"></td>
                <td ng-bind="specie.classification"></td>
                <td ng-bind="specie.designation"></td>
@@ -584,8 +584,7 @@ starWarsApp.controller("characterController", ["$scope", "$rootScope", "dataServ
             for (let c of $scope.characters) {
               c.height = isNaN(c.height) ? "Unknown" : parseInt(c.height);
               c.mass = isNaN(c.mass) ? "Unknown" : parseInt(c.mass);
-            }
-            
+            }            
         }).finally(function() {
             $scope.loadingCharacters = false;     
         });
@@ -932,4 +931,10 @@ starWarsApp.service("dataService", ["$http", "messageService", "errorService", f
         $('.navbar-nav .nav-link').removeClass('active');
         $(this).addClass('active');
     })
+}]);
+
+starWarsApp.filter('starNumber', [function () {
+  return function (text) {
+      return text.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
 }]);
