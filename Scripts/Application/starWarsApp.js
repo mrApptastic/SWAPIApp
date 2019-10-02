@@ -170,15 +170,25 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
              <table class="table" >
              <thead>
              <tr>
-               <th>Name</th>
-               <th>Average Lifespan</th>
-               <th>Language</th>
-               <th>Classification</th>
-               <th>Designation</th>
+               <th>
+                <mrsort lbl="Name" srt="name"></mrsort>
+               </th>
+               <th>
+                <mrsort lbl="Avg. Lifespan" srt="average_lifespan"></mrsort>
+               </th>
+               <th>
+                <mrsort lbl="Language" srt="language"></mrsort>
+               </th>
+               <th>
+                <mrsort lbl="Class." srt="classification"></mrsort>
+               </th>
+               <th>
+                <mrsort lbl="Design." srt="designation"></mrsort>
+               </th>
              </tr>
            </thead>
            <tbody>
-             <tr ng-repeat="specie in species" data-toggle="modal" data-target="#specieModal" ng-click="changeSpecie(specie)">
+             <tr ng-repeat="specie in species | orderBy : sortOrder : sortDirection" data-toggle="modal" data-target="#specieModal" ng-click="changeSpecie(specie)">
                <td ng-bind="specie.name"></td>
                <td ng-bind="specie.average_lifespan"></td>
                <td ng-bind="specie.language"></td>
@@ -199,10 +209,18 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
                       <table class="table">
                         <tbody>
                           <tr>
+                            <td>Name</td>
+                            <td ng-bind="selectedSpecie.name"></td>
+                          </tr>
+                          <tr>
+                            <td>Average Lifespan</td>
+                            <td ng-bind="selectedSpecie.average_lifespan"></td>
+                          </tr>
+                          <tr>
                             <td>Classification</td>
                             <td ng-bind="selectedSpecie.classification"></td>
                           </tr>
-                        </tbody
+                        </tbody>
                       </table>
                     </div>
                   </div>
@@ -232,15 +250,25 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
              <table class="table" >
              <thead>
              <tr>
-               <th>Name</th>
-               <th>Model</th>
-               <th>Manufacturer</th>
-               <th>Passengers</th>
-               <th>Max. Speed</th>
+               <th>
+                <mrsort lbl="Name." srt="designation"></mrsort>
+               </th>
+               <th>
+                <mrsort lbl="Model" srt="model"></mrsort>
+               </th>
+               <th>
+                <mrsort lbl="Manufacturer" srt="manufacturer"></mrsort>
+               </th>
+               <th style="min-width: 160px;">
+                <mrsort lbl="Capacity" srt="passengers"></mrsort>
+               </th>
+               <th style="min-width: 124px;">
+                <mrsort lbl="Speed" srt="max_atmosphering_speed"></mrsort>
+               </th>
              </tr>
            </thead>
            <tbody>
-             <tr ng-repeat="vehicle in vehicles" data-toggle="modal" data-target="#vehicleModal" ng-click="changeVehicle(vehicle)">
+             <tr ng-repeat="vehicle in vehicles | orderBy : sortOrder : sortDirection" data-toggle="modal" data-target="#vehicleModal" ng-click="changeVehicle(vehicle)">
                <td ng-bind="vehicle.name"></td>
                <td ng-bind="vehicle.model"></td>
                <td ng-bind="vehicle.manufacturer"></td>
@@ -261,9 +289,25 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
                       <table class="table">
                         <tbody>
                           <tr>
+                            <td>Name</td>
+                            <td ng-bind="selectedVehicle.name"></td>
+                          </tr>
+                          <tr>
                             <td>Model</td>
                             <td ng-bind="selectedVehicle.model"></td>
                           </tr>
+                          <tr>
+                            <td>Manufacturer</td>
+                            <td ng-bind="selectedVehicle.manufacturer"></td>
+                          </tr>
+                          <tr>
+                            <td>Passengers</td>
+                            <td ng-bind="selectedVehicle.passengers"></td>
+                          </tr>   
+                          <tr>
+                            <td>Max. Speed</td>
+                            <td ng-bind="selectedVehicle.max_atmosphering_speed"></td>
+                          </tr>                                                                            
                         </tbody
                       </table>
                     </div>
@@ -293,16 +337,26 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
             <div ng-show="!loadingStarships">
              <table class="table" >
              <thead>
-             <tr>
-               <th>Name</th>
-               <th>Model</th>
-               <th>Manufacturer</th>
-               <th>Passengers</th>
-               <th>Max. Speed</th>
+              <tr>
+                <th>
+                  <mrsort lbl="Name." srt="designation"></mrsort>
+                </th>
+                <th>
+                  <mrsort lbl="Model" srt="model"></mrsort>
+                </th>
+                <th>
+                  <mrsort lbl="Manufacturer" srt="manufacturer"></mrsort>
+                </th>
+                <th style="min-width: 160px;">
+                  <mrsort lbl="Capacity" srt="passengers"></mrsort>
+                </th>
+                <th style="min-width: 124px;">
+                  <mrsort lbl="Speed" srt="max_atmosphering_speed"></mrsort>
+                </th>
              </tr>
            </thead>
            <tbody>
-             <tr ng-repeat="starship in starships" data-toggle="modal" data-target="#starshipModal" ng-click="changeStarship(starship)">
+             <tr ng-repeat="starship in starships | orderBy : sortOrder : sortDirection" data-toggle="modal" data-target="#starshipModal" ng-click="changeStarship(starship)">
                <td ng-bind="starship.name"></td>
                <td ng-bind="starship.model"></td>
                <td ng-bind="starship.manufacturer"></td>
@@ -322,10 +376,26 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
                     <div class="modal-body">
                       <table class="table">
                         <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td ng-bind="selectedStarship.name"></td>
+                          </tr>
                           <tr>
                             <td>Model</td>
                             <td ng-bind="selectedStarship.model"></td>
                           </tr>
+                          <tr>
+                            <td>Manufacturer</td>
+                            <td ng-bind="selectedStarship.manufacturer"></td>
+                          </tr>
+                          <tr>
+                            <td>Passengers</td>
+                            <td ng-bind="selectedStarship.passengers"></td>
+                          </tr>   
+                          <tr>
+                            <td>Max. Speed</td>
+                            <td ng-bind="selectedStarship.max_atmosphering_speed"></td>
+                          </tr>   
                         </tbody
                       </table>
                     </div>
@@ -364,14 +434,14 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
              </tr>
            </thead>
            <tbody>
-            <tr ng-repeat="planet in planets" data-toggle="modal" data-target="#planetModal" ng-click="changePlanet(planet)">
+            <tr ng-repeat="planet in planets | orderBy : sortOrder : sortDirection" data-toggle="modal" data-target="#planetModal" ng-click="changePlanet(planet)">
                <td ng-bind="planet.name"></td>
                <td ng-bind="planet.rotation_period"></td>
                <td ng-bind="planet.orbital_period"></td>
                <td ng-bind="planet.diameter"></td>
                <td ng-bind="planet.population"></td>
              </tr>
-           </tbody>
+           </tbody> 
               </table>
               <ul uib-pagination total-items="totalPlanets" ng-model="selectedPlanetsPage" max-size="10" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-click="getPlanets()"></ul>
               <div class="modal" id="planetModal">
@@ -418,7 +488,7 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
              </tr>
            </thead>
            <tbody>
-           <tr ng-repeat="movie in movies" data-toggle="modal" data-target="#movieModal" ng-click="changeMovie(movie)">
+           <tr ng-repeat="movie in movies | orderBy : sortOrder : sortDirection" data-toggle="modal" data-target="#movieModal" ng-click="changeMovie(movie)">
                <td ng-bind="movie.title"></td>
                <td ng-bind="movie.episode_id"></td>
                <td ng-bind="movie.director"></td>
@@ -510,6 +580,12 @@ starWarsApp.controller("characterController", ["$scope", "$rootScope", "dataServ
         dataService.getAllCharacters($scope.selectedCharacterPage, $scope.searchText).then(function(response) {
             $scope.totalCharacters = response.data.count;
             $scope.characters = response.data.results;
+            /* Int as represented as string issue fix */
+            for (let c of $scope.characters) {
+              c.height = isNaN(c.height) ? "Unknown" : parseInt(c.height);
+              c.mass = isNaN(c.mass) ? "Unknown" : parseInt(c.mass);
+            }
+            
         }).finally(function() {
             $scope.loadingCharacters = false;     
         });
@@ -541,6 +617,10 @@ starWarsApp.controller("speciesController", ["$scope", "$rootScope", "dataServic
         dataService.getAllRaces($scope.selectedSpeciesPage, $scope.searchText).then(function(response) {
             $scope.totalSpecies = response.data.count;
             $scope.species = response.data.results;
+            /* Int as represented as string issue fix */
+            for (let s of $scope.species) {
+              s.average_lifespan = isNaN(s.average_lifespan) ? "Unknown" : parseInt(s.average_lifespan);
+            }            
         }).finally(function() {
             $scope.loadingSpecies = false;      
         });
