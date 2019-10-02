@@ -643,12 +643,21 @@ starWarsApp.controller("funController", ["$scope", "$rootScope", "$rootScope", f
     $scope.snakeInit = function () {
       var ib = new mrSnakey("mrSnakey", 
       $scope.baseWidth, 
-      $scope.baseHeight);
+      $scope.baseHeight,
+      "Starry Snake",
+      "#392C10",
+      "#C6BA73",
+      "30px 'DeathStar'"
+      );
     };
     $scope.rectInit = function () {
       var per = new rectAngular("mrRect", 
       $scope.baseWidth, 
-      $scope.baseHeight);
+      $scope.baseHeight,
+      "Star Pong",
+      "#C6BA73",
+      "30px 'DeathStar'"
+      );
     };
     $scope.paintInit = function () {
       document.getElementById("toolUha").innerHTML = "";

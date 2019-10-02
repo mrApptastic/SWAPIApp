@@ -1,13 +1,13 @@
-﻿var mrSnakey = function (elem, width, height) {
+﻿var mrSnakey = function (elem, width, height, heading, fill, stroke, font) {
 	var mrS = this;
 	mrS.elm = document.getElementById(elem);
 	mrS.ctx = mrS.elm.getContext("2d");
-	mrS.set = { wdt : (width ? width : 800), hgt : (height ? height : 800) };
+	mrS.set = { wdt : (width ? width : 800), hgt : (height ? height : 800), heading : (heading ? heading : "mrSnakey"), fill : (fill ? fill : "rgb(165,165,255)"), stroke : (stroke ? stroke : "rgb(66,66,231)"), font : (font ? font : "30px Verdana") };
 	mrS.pen = { x : 5, y : 5, mX : true, mY : true, size : 5, step: 1, speed : 5, shift : 500, animation : null, count : 0, path : [] };
 	mrS.setBackground = function () {
-		mrS.ctx.fillStyle = "#392C10"; 
+		mrS.ctx.fillStyle = mrS.set.fill; 
 		mrS.ctx.fillRect(0,0,mrS.set.wdt,mrS.set.hgt); 
-		mrS.ctx.fillStyle = "#C6BA73";
+		mrS.ctx.fillStyle = mrS.set.stroke;
 	};
 	mrS.setStartScreen = function () {
 		var offsetX = mrS.set.wdt / 20; 
@@ -17,9 +17,9 @@
 		var highscore = mrS.getHighScore();	
 		mrS.setBackground();			
 		mrS.ctx.fillRect(offsetX,offsetX,mrS.set.wdt - 2 * offsetX,mrS.set.hgt - 2 * offsetY);
-		mrS.ctx.fillText("Starry Starry Snake", middle - 160, 30); 
-		mrS.ctx.fillStyle = "#392C10";
-		mrS.ctx.fillText("Press enter to start...", middle - 200, row * 4);
+		mrS.ctx.fillText(mrS.set.heading, middle - 100, 30); 
+		mrS.ctx.fillStyle = mrS.set.fill;
+		mrS.ctx.fillText("Press 's' to start...", middle - 200, row * 4);
 		for (let i = 0; i < highscore.length; i++) {
 			mrS.ctx.fillText(i + 1 + "- " + highscore[i].Score + " - " + highscore[i].Name, middle - 250, row * (6 + i *2));
 		}
@@ -105,12 +105,12 @@
 		if (height) {
 			mrS.elm.height = mrS.set.hgt;
 		}
-		mrS.ctx.font = "30px 'DeathStar'";
-		mrS.ctx.strokeStyle = "#C6BA73"; 
+		mrS.ctx.font = mrS.set.font; 
+		mrS.ctx.strokeStyle = mrS.set.fill; 
 		mrS.setStartScreen();
 		window.onkeydown = function (e) {
 			e.preventDefault();			
-			if (!mrS.pen.animation && e.keyCode === 13) {
+			if (!mrS.pen.animation && e.keyCode === 83) {
 				mrS.startGame();
 			}			
 			switch (e.keyCode) {
