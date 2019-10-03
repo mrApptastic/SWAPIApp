@@ -137,10 +137,10 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
                             <td ng-bind="selectedCharacter.skin_color"></td>
                           </tr>    
                           <tr>
-                          <td>Total Films</td>
-                          <td ng-bind="selectedCharacter.films.length"></td>
-                        </tr>                                                                                        
-                        </tbody
+                            <td>Total Films</td>
+                            <td ng-bind="selectedCharacter.films.length"></td>
+                          </tr>                                                                                        
+                        </tbody>
                       </table>
                     </div>
                   </div>
@@ -251,7 +251,7 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
              <thead>
              <tr>
                <th>
-                <mrsort lbl="Name." srt="designation"></mrsort>
+                <mrsort lbl="Name" srt="name"></mrsort>
                </th>
                <th>
                 <mrsort lbl="Model" srt="model"></mrsort>
@@ -308,7 +308,7 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
                             <td>Max. Speed</td>
                             <td ng-bind="selectedVehicle.max_atmosphering_speed"></td>
                           </tr>                                                                            
-                        </tbody
+                        </tbody>
                       </table>
                     </div>
                   </div>
@@ -339,7 +339,7 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
              <thead>
               <tr>
                 <th>
-                  <mrsort lbl="Name." srt="designation"></mrsort>
+                  <mrsort lbl="Name" srt="name"></mrsort>
                 </th>
                 <th>
                   <mrsort lbl="Model" srt="model"></mrsort>
@@ -396,7 +396,7 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
                             <td>Max. Speed</td>
                             <td ng-bind="selectedStarship.max_atmosphering_speed"></td>
                           </tr>   
-                        </tbody
+                        </tbody>
                       </table>
                     </div>
                   </div>
@@ -458,7 +458,7 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
                             <td>Rotation Period</td>
                             <td ng-bind="selectedPlanet.rotation_period"></td>
                           </tr>
-                        </tbody
+                        </tbody>
                       </table>
                     </div>
                   </div>
@@ -511,7 +511,7 @@ starWarsApp.config(['$provide', '$routeProvider', function ($provide, $routeProv
                             <td>Director</td>
                             <td ng-bind="selectedMovie.director"></td>
                           </tr>
-                        </tbody
+                        </tbody>
                       </table>
                     </div>
                   </div>
