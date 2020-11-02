@@ -1,6 +1,6 @@
 var starWarsApp = angular.module("starWarsApp", ["ngRoute", "ngAnimate", "starWarsText", "mrMr", "ui.bootstrap"]);
 
-var appVersion = 1.02;
+var appVersion = 1.04;
 
 starWarsApp.run(function ($rootScope) {
     /* Quick fix for global scope issue when changing page */
@@ -816,8 +816,9 @@ starWarsApp.service("messageService", [function () {
 }]);
 
 starWarsApp.service("dataService", ["$http", "messageService", "errorService", function ($http, messageService, errorService) {
+    this.apiPrefix = "https://swapi.dev/api/";
     this.getAllCharacters = function (page, search) {
-        return $http.get("https://swapi.co/api/people/?page=" + page + "&search=" + search)
+        return $http.get(this.apiPrefix + "people/?page=" + page + "&search=" + search)
             .then(function (result) {
                 return result;
             })
@@ -826,16 +827,17 @@ starWarsApp.service("dataService", ["$http", "messageService", "errorService", f
             });
     };
     this.getCharacter = function (id) {
-        return $http.get("https://swapi.co/api/people/" + id)
+        return $http.get(this.apiPrefix + "people/" + id)
             .then(function (result) {
                 return result;
+
             })
             .catch(function (result) {
                 errorService.logError(result);
             });
     };
     this.getAllCrafts = function (page, search) {
-        return $http.get("https://swapi.co/api/starships/?page=" + page + "&search=" + search)
+        return $http.get(this.apiPrefix + "starships/?page=" + page + "&search=" + search)
             .then(function (result) {
                 return result;
             })
@@ -844,7 +846,7 @@ starWarsApp.service("dataService", ["$http", "messageService", "errorService", f
             });
     };
     this.getCraft = function (id) {
-        return $http.get("https://swapi.co/api/starships/" + id)
+        return $http.get(this.apiPrefix + "starships/" + id)
             .then(function (result) {
                 return result;
             })
@@ -853,7 +855,7 @@ starWarsApp.service("dataService", ["$http", "messageService", "errorService", f
             });
     };
     this.getAllVehicles = function (page, search) {
-        return $http.get("https://swapi.co/api/vehicles/?page=" + page + "&search=" + search)
+        return $http.get(this.apiPrefix + "vehicles/?page=" + page + "&search=" + search)
             .then(function (result) {
                 return result;
             })
@@ -862,7 +864,7 @@ starWarsApp.service("dataService", ["$http", "messageService", "errorService", f
             });
     };
     this.getVehicle = function (id) {
-        return $http.get("https://swapi.co/api/vehicles/" + id)
+        return $http.get(this.apiPrefix + "vehicles/" + id)
             .then(function (result) {
                 return result;
             })
@@ -871,7 +873,7 @@ starWarsApp.service("dataService", ["$http", "messageService", "errorService", f
             });
     };
     this.getAllPlanets = function (page, search) {
-        return $http.get("https://swapi.co/api/planets/?page=" + page + "&search=" + search)
+        return $http.get(this.apiPrefix + "planets/?page=" + page + "&search=" + search)
             .then(function (result) {
                 return result;
             })
@@ -880,7 +882,7 @@ starWarsApp.service("dataService", ["$http", "messageService", "errorService", f
             });
     };
     this.getPlanet = function (id) {
-        return $http.get("https://swapi.co/api/planets/" + id)
+        return $http.get(this.apiPrefix + "planets/" + id)
             .then(function (result) {
                 return result;
             })
@@ -889,7 +891,7 @@ starWarsApp.service("dataService", ["$http", "messageService", "errorService", f
             });
     };
     this.getAllMovies = function (page, search) {
-        return $http.get("https://swapi.co/api/films/?page=" + page + "&search=" + search)
+        return $http.get(this.apiPrefix + "films/?page=" + page + "&search=" + search)
             .then(function (result) {
                 return result;
             })
@@ -898,7 +900,7 @@ starWarsApp.service("dataService", ["$http", "messageService", "errorService", f
             });
     };
     this.getMovie = function (id) {
-        return $http.get("https://swapi.co/api/films/" + id)
+        return $http.get(this.apiPrefix + "films/" + id)
             .then(function (result) {
                 return result;
             })
@@ -907,7 +909,7 @@ starWarsApp.service("dataService", ["$http", "messageService", "errorService", f
             });
     };
     this.getAllRaces = function (page, search) {
-        return $http.get("https://swapi.co/api/species/?page=" + page + "&search=" + search)
+        return $http.get(this.apiPrefix + "species/?page=" + page + "&search=" + search)
             .then(function (result) {
                 return result;
             })
@@ -916,7 +918,7 @@ starWarsApp.service("dataService", ["$http", "messageService", "errorService", f
             });
     };
     this.getRace = function (id) {
-        return $http.get("https://swapi.co/api/species/" + id)
+        return $http.get(this.apiPrefix + "species/" + id)
             .then(function (result) {
                 return result;
             })

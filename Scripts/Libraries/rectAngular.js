@@ -66,7 +66,7 @@
 		var highscore = rect.getHighScore();
 		for (let i = 0; i < highscore.length; i++) {
 			let d = new Date(highscore[i].date);
-			let thisDate = d.getDate() + "/" + d.getMonth() + " " + (d.getYear() + 1900);
+			let thisDate = d.getDate() + "/" + (d.getMonth() +1) + " " + (d.getYear() + 1900);
 			rect.ctxt.fillText(i + 1 + "- " + highscore[i].score + " - " + highscore[i].name + " - " + thisDate, middle - 300, row * (6 + i *2));
 		}
 	};

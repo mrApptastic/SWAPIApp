@@ -15,60 +15,60 @@ To-do-list:
 - HTML Export: Bug! Only the selected layer is exported...
 - Save: Perhaps save work to local storage;	
 - Steps Back-Buffer.
+- New drawing functions: // Halvmåne, Pil, Kors, Figur (Kurve), Figur (Bézier)
 */
 
 var captainCanvas = function(canvas, tools, settings) {
 	var cpt = this;
-	cpt.id = document.getElementById(canvas);
-	cpt.tl = document.getElementById(tools);
-	cpt.ct = cpt.id.getContext("2d");
-	cpt.ix = 0;
-	cpt.dt = [[]];	
-	cpt.set = {
-				"fit" : settings ? (settings.Fit != null ? settings.Fit : true) : true,
-				"tog" : settings ? (settings.Toggle != null ? settings.Toggle : true) : false,
-                "key" : settings ? (settings.Shortcuts != null ? settings.Shortcuts : true) : true,
-                "evt" : settings ? (settings.DefaultEvents != null ? settings.DefaultEvents : true) : true,
-				"cls" : settings ? (settings.Colours != null ? settings.Colours : []) : [],
-				"clw" : settings ? (settings.OverwriteColours != null ? settings.OverwriteColours : false) : false,
-				"lan" : false, //window.navigator.language.indexOf("da") != -1,
+	cpt.elem = document.getElementById(canvas);
+	cpt.tools = document.getElementById(tools);
+	cpt.context = cpt.elem.getContext("2d");
+	cpt.index = 0;
+	cpt.data = [[]];	
+	cpt.settings = {
+				"fit" : settings ? (settings.Fit !== null ? settings.Fit : true) : true,
+				"tog" : settings ? (settings.Toggle !== null ? settings.Toggle : true) : false,
+                "key" : settings ? (settings.Shortcuts !== null ? settings.Shortcuts : true) : true,
+                "evt" : settings ? (settings.DefaultEvents !== null ? settings.DefaultEvents : true) : true,
+				"cls" : settings ? (settings.Colours !== null ? settings.Colours : []) : [],
+				"clw" : settings ? (settings.OverwriteColours !== null ? settings.OverwriteColours : false) : false,
+				"lan" : window.navigator.language.indexOf("da") !== -1,
 				"foc" : false
 			  };
-	cpt.fct = ["Firkant (Fyld)","Firkant (Streg)", "Firkant", "Cirkel", "Stjerne", "Trekant", "Trekant (Ret)", "Rhombe", "Trapezoid", "Ellipse", "Smiley", "Hjerte", "Linie", "Figur (Linie)"];
-	// Halvmåne, Pil, Kors, Figur (Kurve), Figur (Bézier)
-    cpt.col = ["AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azure", "Beige", "Bisque", "Black", "BlanchedAlmond", "Blue", "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse", "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson", "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray", "DarkGrey", "DarkGreen", "DarkKhaki", "DarkMagenta", "DarkOliveGreen", "DarkOrange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen", "DarkSlateBlue", "DarkSlateGray", "DarkSlateGrey", "DarkTurquoise", "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue", "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro", "GhostWhite", "Gold", "GoldenRod", "Gray", "Grey", "Green", "GreenYellow", "HoneyDew", "HotPink", "IndianRed ", "Indigo ", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan", "LightGoldenRodYellow", "LightGray", "LightGrey", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSlateGrey", "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen", "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise", "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "RebeccaPurple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue", "SlateBlue", "SlateGray", "SlateGrey", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle", "Tomato", "Transparent", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen"];
-	cpt.brs = {"Slc" : "Firkant", "Lvl" : 0, "Hgt" : 10, "Wth" : 10, "Fil" : "Black", "Str" : "Transparent", "LastX" : null, "LastY" : null, "Step" : 0, "Buff" : [], "CursX" : 0, "CursY" : 0 };
+	cpt.methods = ["Firkant (Fyld)","Firkant (Streg)", "Firkant", "Cirkel", "Stjerne", "Trekant", "Trekant (Ret)", "Rhombe", "Trapezoid", "Ellipse", "Smiley", "Hjerte", "Linie", "Figur (Linie)"];
+    cpt.colours = ["AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azure", "Beige", "Bisque", "Black", "BlanchedAlmond", "Blue", "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse", "Chocolate", "Coral", "CornflowerBlue", "Cornsilk", "Crimson", "Cyan", "DarkBlue", "DarkCyan", "DarkGoldenRod", "DarkGray", "DarkGrey", "DarkGreen", "DarkKhaki", "DarkMagenta", "DarkOliveGreen", "DarkOrange", "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSeaGreen", "DarkSlateBlue", "DarkSlateGray", "DarkSlateGrey", "DarkTurquoise", "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DimGrey", "DodgerBlue", "FireBrick", "FloralWhite", "ForestGreen", "Fuchsia", "Gainsboro", "GhostWhite", "Gold", "GoldenRod", "Gray", "Grey", "Green", "GreenYellow", "HoneyDew", "HotPink", "IndianRed ", "Indigo ", "Ivory", "Khaki", "Lavender", "LavenderBlush", "LawnGreen", "LemonChiffon", "LightBlue", "LightCoral", "LightCyan", "LightGoldenRodYellow", "LightGray", "LightGrey", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue", "LightSlateGray", "LightSlateGrey", "LightSteelBlue", "LightYellow", "Lime", "LimeGreen", "Linen", "Magenta", "Maroon", "MediumAquaMarine", "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen", "MediumTurquoise", "MediumVioletRed", "MidnightBlue", "MintCream", "MistyRose", "Moccasin", "NavajoWhite", "Navy", "OldLace", "Olive", "OliveDrab", "Orange", "OrangeRed", "Orchid", "PaleGoldenRod", "PaleGreen", "PaleTurquoise", "PaleVioletRed", "PapayaWhip", "PeachPuff", "Peru", "Pink", "Plum", "PowderBlue", "Purple", "RebeccaPurple", "Red", "RosyBrown", "RoyalBlue", "SaddleBrown", "Salmon", "SandyBrown", "SeaGreen", "SeaShell", "Sienna", "Silver", "SkyBlue", "SlateBlue", "SlateGray", "SlateGrey", "Snow", "SpringGreen", "SteelBlue", "Tan", "Teal", "Thistle", "Tomato", "Transparent", "Turquoise", "Violet", "Wheat", "White", "WhiteSmoke", "Yellow", "YellowGreen"];
+	cpt.brush = {"Slc" : "Firkant", "Lvl" : 0, "Hgt" : 10, "Wth" : 10, "Fil" : "Black", "Str" : "Transparent", "LastX" : null, "LastY" : null, "Step" : 0, "Buff" : [], "CursX" : 0, "CursY" : 0 };
 	cpt.drg = false;
 	cpt.drw = function(mrX, mrY) {
         var z = [];
-        var f = document.getElementsByClassName(cpt.tl.id + "_selectedFunction")[0].value;
-		var x = mrX - (cpt.id.getBoundingClientRect().left + window.scrollX) // cpt.id.offsetLeft;
-		var y = mrY - (cpt.id.getBoundingClientRect().top + window.scrollY); //cpt.id.offsetTop;
-		var w = parseInt(cpt.brs.Wth);
-		var h = parseInt(cpt.brs.Hgt);
+        var f = document.getElementsByClassName(cpt.tools.id + "_selectedFunction")[0].value;
+		var x = mrX - (cpt.elem.getBoundingClientRect().left + window.scrollX);
+		var y = mrY - (cpt.elem.getBoundingClientRect().top + window.scrollY);
+		var w = parseInt(cpt.brush.Wth);
+		var h = parseInt(cpt.brush.Hgt);
         var s =  0;
         var e =  2 * Math.PI;
-        if (f == "Firkant (Fyld)") {
+        if (f === "Firkant (Fyld)") {
             z.push({"Fct" : "fillRect", "X" : x, "Y" : y, "Width" : w, "Height" : h}); 
         }
-        else if (f == "Firkant (Streg)") {
+        else if (f === "Firkant (Streg)") {
             z.push({"Fct" : "strokeRect", "X" : x, "Y" : y, "Width" : w, "Height" : h});
         }
-        else if (f == "Firkant") {
+        else if (f === "Firkant") {
 		    z.push({"Fct" : "beginPath" });
             z.push({"Fct" : "rect", "X" : x, "Y" : y, "Width" : w, "Height" : h});
 		    z.push({"Fct" : "closePath" });
 		    z.push({"Fct" : "fill" });
 		    z.push({"Fct" : "stroke" });
         }
-        else if (f == "Cirkel") {
+        else if (f === "Cirkel") {
 		    z.push({"Fct" : "beginPath" });
             z.push({"Fct" : "arc", "X" : x, "Y" : y, "Width" : w, "StartAngle" : s, "EndAngle" : e});      
 		    z.push({"Fct" : "closePath" });	   
 		    z.push({"Fct" : "fill" });
 		    z.push({"Fct" : "stroke" });				      
         }
-		else if (f == "Stjerne") {
+		else if (f === "Stjerne") {
             let innerRadius = w;
 			let outerRadius = h;
             let spikes = 5;
@@ -93,7 +93,7 @@ var captainCanvas = function(canvas, tools, settings) {
 			z.push({"Fct" : "fill" });
 			z.push({"Fct" : "stroke" });
         }
-        else if (f == "Trekant") {
+        else if (f === "Trekant") {
 		    z.push({"Fct" : "beginPath" });
             z.push({"Fct" : "moveTo", "X" : x, "Y" : y });
             z.push({"Fct" : "lineTo", "X" : (x + w), "Y" : y }); 
@@ -102,7 +102,7 @@ var captainCanvas = function(canvas, tools, settings) {
 		    z.push({"Fct" : "fill" });
 		    z.push({"Fct" : "stroke" });	
 		}
-        else if (f == "Trekant (Ret)") {
+        else if (f === "Trekant (Ret)") {
 		    z.push({"Fct" : "beginPath" });
             z.push({"Fct" : "moveTo", "X" : x, "Y" : y });
             z.push({"Fct" : "lineTo", "X" : (x + w), "Y" : (y + h) }); 
@@ -111,7 +111,7 @@ var captainCanvas = function(canvas, tools, settings) {
 		    z.push({"Fct" : "fill" });
 		    z.push({"Fct" : "stroke" });	
         }
-        else if (f == "Rhombe") {
+        else if (f === "Rhombe") {
   		    z.push({"Fct" : "beginPath" });
             z.push({"Fct" : "moveTo", "X" : x, "Y" : y });
             z.push({"Fct" : "lineTo", "X" : (x + w) - (w / 5), "Y" : y }); 
@@ -121,7 +121,7 @@ var captainCanvas = function(canvas, tools, settings) {
 		    z.push({"Fct" : "fill" });
 		    z.push({"Fct" : "stroke" });          
         }
-        else if (f == "Trapezoid") {
+        else if (f === "Trapezoid") {
             z.push({"Fct" : "beginPath" });
             z.push({"Fct" : "moveTo", "X" : x + (w / 5), "Y" : y });
             z.push({"Fct" : "lineTo", "X" : (x + w) - (w / 5), "Y" : y }); 
@@ -131,7 +131,7 @@ var captainCanvas = function(canvas, tools, settings) {
 		    z.push({"Fct" : "fill" });
 		    z.push({"Fct" : "stroke" });  
         }
-        else if (f == "Ellipse") {
+        else if (f === "Ellipse") {
             let kappa = .5522848;
             let ox = (w / 2) * kappa;
             let oy = (h / 2) * kappa;
@@ -149,7 +149,7 @@ var captainCanvas = function(canvas, tools, settings) {
 		    z.push({"Fct" : "fill" });
 		    z.push({"Fct" : "stroke" });    
         }
-		else if (f == "Smiley") {
+		else if (f === "Smiley") {
             z.push({"Fct" : "beginPath" });
             z.push({"Fct" : "arc", "X" : x, "Y" : y, "Width" : w, "StartAngle" : s, "EndAngle" : e, "Anticlockwise" : true });
             z.push({"Fct" : "moveTo", "X" : (x + w - (w * 3 / 10)), "Y" : y });
@@ -162,7 +162,7 @@ var captainCanvas = function(canvas, tools, settings) {
 		    z.push({"Fct" : "fill" });
 		    z.push({"Fct" : "stroke" });				      
 		}
-		else if (f == "Hjerte") {
+		else if (f === "Hjerte") {
             let d = Math.min(w, w);
             z.push({"Fct" : "beginPath" });
             z.push({"Fct" : "moveTo", "X" : x, "Y" : y + d / 4 });
@@ -180,7 +180,7 @@ var captainCanvas = function(canvas, tools, settings) {
 		}
 
         if (cpt.drg) {
-            cpt.dt[cpt.ix] = cpt.dt[cpt.ix].concat(z);
+            cpt.data[cpt.index] = cpt.data[cpt.index].concat(z);
         }
 
 		cpt.dat();  
@@ -217,49 +217,49 @@ var captainCanvas = function(canvas, tools, settings) {
         }
 	};
 	cpt.cfl = function() {
-		var fill = document.getElementsByClassName(cpt.tl.id + "_selectedFill")[0].value;
-		cpt.brs.Fil = fill;
-		if (cpt.dt[cpt.ix].length > 0) {
-			if (cpt.dt[cpt.ix][cpt.dt[cpt.ix].length - 1].Fct != "fillStyle") {
-				cpt.dt[cpt.ix].push({"Fct" : "fillStyle", "Value" : cpt.brs.Fil});
+		var fill = document.getElementsByClassName(cpt.tools.id + "_selectedFill")[0].value;
+		cpt.brush.Fil = fill;
+		if (cpt.data[cpt.index].length > 0) {
+			if (cpt.data[cpt.index][cpt.data[cpt.index].length - 1].Fct !== "fillStyle") {
+				cpt.data[cpt.index].push({"Fct" : "fillStyle", "Value" : cpt.brush.Fil});
 			}
 			else {
-				cpt.dt[cpt.ix][cpt.dt[cpt.ix].length - 1].Value = cpt.brs.Fil;
+				cpt.data[cpt.index][cpt.data[cpt.index].length - 1].Value = cpt.brush.Fil;
 			}
 		}
 		else {
-			cpt.dt[cpt.ix].push({"Fct" : "fillStyle", "Value" : cpt.brs.Fil});
+			cpt.data[cpt.index].push({"Fct" : "fillStyle", "Value" : cpt.brush.Fil});
 		}		
 	};
 	
 	cpt.cst = function() {
-		var stroke = document.getElementsByClassName(cpt.tl.id + "_selectedStroke")[0].value;
-		cpt.brs.Str = stroke;
-		if (cpt.dt[cpt.ix].length > 0) {
-			if (cpt.dt[cpt.ix][cpt.dt[cpt.ix].length - 1].Fct != "strokeStyle") {
-				cpt.dt[cpt.ix].push({"Fct" : "strokeStyle", "Value" : cpt.brs.Str});
+		var stroke = document.getElementsByClassName(cpt.tools.id + "_selectedStroke")[0].value;
+		cpt.brush.Str = stroke;
+		if (cpt.data[cpt.index].length > 0) {
+			if (cpt.data[cpt.index][cpt.data[cpt.index].length - 1].Fct !== "strokeStyle") {
+				cpt.data[cpt.index].push({"Fct" : "strokeStyle", "Value" : cpt.brush.Str});
 			}
 			else {
-				cpt.dt[cpt.ix][cpt.dt[cpt.ix].length - 1].Value = cpt.brs.Str;
+				cpt.data[cpt.index][cpt.data[cpt.index].length - 1].Value = cpt.brush.Str;
 			}
 		}
 		else {
-			cpt.dt[cpt.ix].push({"Fct" : "strokeStyle", "Value" : cpt.brs.Str});
+			cpt.data[cpt.index].push({"Fct" : "strokeStyle", "Value" : cpt.brush.Str});
 		}		
 	};
 	cpt.clw = function() {
-		var lineWidth = document.getElementsByClassName(cpt.tl.id + "_lineWidth")[0].value;
+		var lineWidth = document.getElementsByClassName(cpt.tools.id + "_lineWidth")[0].value;
 		if (!isNaN(lineWidth)) {
-			if (cpt.dt[cpt.ix].length > 0) {
-				if (cpt.dt[cpt.ix][cpt.dt[cpt.ix].length - 1].Fct != "lineWidth") {
-					cpt.dt[cpt.ix].push({"Fct" : "lineWidth", "Value" : lineWidth});
+			if (cpt.data[cpt.index].length > 0) {
+				if (cpt.data[cpt.index][cpt.data[cpt.index].length - 1].Fct !== "lineWidth") {
+					cpt.data[cpt.index].push({"Fct" : "lineWidth", "Value" : lineWidth});
 				}
 				else {
-					cpt.dt[cpt.ix][cpt.dt[cpt.ix].length - 1].Value = lineWidth;
+					cpt.data[cpt.index][cpt.data[cpt.index].length - 1].Value = lineWidth;
 				}
 			}
 			else {
-				cpt.dt[cpt.ix].push({"Fct" : "lineWidth", "Value" : lineWidth});
+				cpt.data[cpt.index].push({"Fct" : "lineWidth", "Value" : lineWidth});
 			}			
         }
 	};
@@ -269,104 +269,104 @@ var captainCanvas = function(canvas, tools, settings) {
 		cpt.clw();	
 	};
     cpt.dim = function() {
-        var height = document.getElementsByClassName(cpt.tl.id + "_height")[0].value;
-        var width =  document.getElementsByClassName(cpt.tl.id + "_width")[0].value;		
+        var height = document.getElementsByClassName(cpt.tools.id + "_height")[0].value;
+        var width =  document.getElementsByClassName(cpt.tools.id + "_width")[0].value;		
         if (!isNaN(height)) {
-            cpt.brs.Hgt = height;
+            cpt.brush.Hgt = height;
         }
         if (!isNaN(width)) {
-            cpt.brs.Wth = width;
+            cpt.brush.Wth = width;
         }
     };
 	cpt.dat = function () {  
-		cpt.ct.clearRect(0,0, cpt.id.getAttribute("width"), cpt.id.getAttribute("height"));        
-		for (let j = cpt.dt.length -1; j >= 0; j--) {
-			for (let i = 0; i < cpt.dt[j].length; i++) {
+		cpt.context.clearRect(0,0, cpt.elem.getAttribute("width"), cpt.elem.getAttribute("height"));        
+		for (let j = cpt.data.length -1; j >= 0; j--) {
+			for (let i = 0; i < cpt.data[j].length; i++) {
 				cpt.drafi(
-					cpt.dt[j][i].Fct, 
-					cpt.dt[j][i].X, 
-					cpt.dt[j][i].Y, 
-					cpt.dt[j][i].Width, 
-					cpt.dt[j][i].Height, 
-					cpt.dt[j][i].Value, 
-					cpt.dt[j][i].StartAngle, 
-					cpt.dt[j][i].EndAngle, 
-					cpt.dt[j][i].Angle, 
-					cpt.dt[j][i].Colour, 
-					cpt.dt[j][i].Offset, 
-					cpt.dt[j][i].Text, 
-					cpt.dt[j][i].MaxWidth, 
-					cpt.dt[j][i].Radius, 
-					cpt.dt[j][i].X2, 
-					cpt.dt[j][i].Y2, 
-					cpt.dt[j][i].Cpx, 
-					cpt.dt[j][i].Cpy, 
-					cpt.dt[j][i].Cpx2, 
-					cpt.dt[j][i].Cpy2,
-					cpt.dt[j][i].RadiusY,
-					cpt.dt[j][i].Rotation,
-					cpt.dt[j][i].Anticlockwise
+					cpt.data[j][i].Fct, 
+					cpt.data[j][i].X, 
+					cpt.data[j][i].Y, 
+					cpt.data[j][i].Width, 
+					cpt.data[j][i].Height, 
+					cpt.data[j][i].Value, 
+					cpt.data[j][i].StartAngle, 
+					cpt.data[j][i].EndAngle, 
+					cpt.data[j][i].Angle, 
+					cpt.data[j][i].Colour, 
+					cpt.data[j][i].Offset, 
+					cpt.data[j][i].Text, 
+					cpt.data[j][i].MaxWidth, 
+					cpt.data[j][i].Radius, 
+					cpt.data[j][i].X2, 
+					cpt.data[j][i].Y2, 
+					cpt.data[j][i].Cpx, 
+					cpt.data[j][i].Cpy, 
+					cpt.data[j][i].Cpx2, 
+					cpt.data[j][i].Cpy2,
+					cpt.data[j][i].RadiusY,
+					cpt.data[j][i].Rotation,
+					cpt.data[j][i].Anticlockwise
 				);
 			}
 		}
 		 
 	};
     cpt.drafi = function (f, x, y, w, h, v, s, e, a, c, o, t, m, r, x2, y2, cx, cy, cx2, cy2, ry, rt, aw) {
-		if (f == "strokeStyle" || f == "fillStyle" || f == "shadowOffsetX" || f == "shadowOffsetY" || f == "shadowBlur" || f == "shadowColor" || f == "font" || f == "textAlign" || f == "textBaseline" || f == "globalAlpha" || f == "globalCompositeOperation" || f == "lineWidth" || f == "lineCap" || f == "lineJoin" || f == "miterLimit") {
-			cpt.ct[f] = v;
+		if (f == "strokeStyle" || f === "fillStyle" || f === "shadowOffsetX" || f === "shadowOffsetY" || f === "shadowBlur" || f === "shadowColor" || f == "font" || f == "textAlign" || f === "textBaseline" || f === "globalAlpha" || f === "globalCompositeOperation" || f === "lineWidth" || f === "lineCap" || f === "lineJoin" || f === "miterLimit") {
+			cpt.context[f] = v;
 		}
-		else if (f == "save" || f == "restore" || f == "beginPath" || f == "closePath" || f == "fill" || f == "stroke" || f == "clip") {
-			cpt.ct[f]();	
+		else if (f === "save" || f === "restore" || f === "beginPath" || f === "closePath" || f === "fill" || f === "stroke" || f === "clip") {
+			cpt.context[f]();	
 		}
-        else if (f == "rotate") {
-            cpt.ct[f](a);
+        else if (f === "rotate") {
+            cpt.context[f](a);
         }
-		else if (f == "moveTo" || f == "lineTo" || f == "scale" || f == "translate") {
-			cpt.ct[f](x, y);		
+		else if (f === "moveTo" || f === "lineTo" || f === "scale" || f === "translate") {
+			cpt.context[f](x, y);		
 		}
-        else if (f == "addColorStop") {
- 			cpt.ct[f](o, c);           
+        else if (f === "addColorStop") {
+ 			cpt.context[f](o, c);           
         }
-		else if (f == "fillRect" || f == "strokeRect" || f == "rect" || f == "clearRect") {
-			cpt.ct[f](x, y, w, h);
+		else if (f === "fillRect" || f === "strokeRect" || f === "rect" || f === "clearRect") {
+			cpt.context[f](x, y, w, h);
 		}
-        else if (f == "fillText" || f == "strokeText") {
- 			cpt.ct[f](t, x, y, m); 			
+        else if (f === "fillText" || f === "strokeText") {
+ 			cpt.context[f](t, x, y, m); 			
         }
-		else if (f == "arc") {
-			cpt.ct[f](x, y, w, s, e, aw);
+		else if (f === "arc") {
+			cpt.context[f](x, y, w, s, e, aw);
 		}
-        else if (f == "arcTo") {
-    		cpt.ct[f](x, y, x2, y2, r);        
+        else if (f === "arcTo") {
+    		cpt.context[f](x, y, x2, y2, r);        
         }
-		else if (f == "ellipse") {
-    		cpt.ct[f](x, y, r, ry, rt, s, e, aw);        
+		else if (f === "ellipse") {
+    		cpt.context[f](x, y, r, ry, rt, s, e, aw);        
         }
-        else if (f == "quadraticCurveTo") {
-       		cpt.ct[f](cx, cy, x, y);          
+        else if (f === "quadraticCurveTo") {
+       		cpt.context[f](cx, cy, x, y);          
         } 
-        else if (f == "bezierCurveTo") {
-			cpt.ct[f](cx, cy, cx2, cy2, x, y);             
+        else if (f === "bezierCurveTo") {
+			cpt.context[f](cx, cy, cx2, cy2, x, y);             
         }   
-        else if (f == "drawImage") {
+        else if (f === "drawImage") {
             
         }
-        else if (f == "putImageData") {
+        else if (f === "putImageData") {
             
         }
-        else if (f == "transform" || f == "setTransform") {
+        else if (f === "transform" || f === "setTransform") {
             
         }
     };
 	cpt.ref = function () {
-		cpt.id.setAttribute("width",window.innerWidth);
-		cpt.id.setAttribute("height",window.innerHeight);
+		cpt.elem.setAttribute("width",window.innerWidth);
+		cpt.elem.setAttribute("height",window.innerHeight);
 		cpt.dat();		
 	};
 	cpt.refl = function () {
-		document.getElementsByClassName(cpt.tl.id + "_dataLevelSelect")[0].innerHTML = "";
-		for (let i = 0; i < cpt.dt.length; i++) {
-			document.getElementsByClassName(cpt.tl.id + "_dataLevelSelect")[0].innerHTML += '<option value="' + i + '">' + i + '</option>';
+		document.getElementsByClassName(cpt.tools.id + "_dataLevelSelect")[0].innerHTML = "";
+		for (let i = 0; i < cpt.data.length; i++) {
+			document.getElementsByClassName(cpt.tools.id + "_dataLevelSelect")[0].innerHTML += '<option value="' + i + '">' + i + '</option>';
         }
 	};
 	cpt.rjsn = function(input) {
@@ -379,10 +379,10 @@ var captainCanvas = function(canvas, tools, settings) {
 					
 					if (Array.isArray(newArr)) {
 						if(concato) {
-							cpt.dt = cpt.dt.concat(newArr);													
+							cpt.data = cpt.data.concat(newArr);													
 						}
 						else {
-							cpt.dt = newArr;
+							cpt.data = newArr;
 						}
 						cpt.ref();
 					}										
@@ -395,22 +395,22 @@ var captainCanvas = function(canvas, tools, settings) {
         }
 	};
 	cpt.wjsn = function (fil) {
-		var json = JSON.stringify(cpt.dt);
+		var json = JSON.stringify(cpt.data);
 		cpt.down((fil ? fil : "captainCanvas")  + ".json", "data:application/json;charset=utf-8," + encodeURIComponent(json));
 	};
 	cpt.rsvg = function() {
 
 	};
 	cpt.wsvg = function (fil) {
-		var firstLine = '<?xml version="1.0" encoding="UTF-8"><svg width="' + cpt.id.getAttribute("width") + '" height="' + cpt.id.getAttribute("height") + '">';
+		var firstLine = '<?xml version="1.0" encoding="UTF-8"><svg width="' + cpt.elem.getAttribute("width") + '" height="' + cpt.elem.getAttribute("height") + '">';
 		var dataLines = '';
-		for (let i = 0; i < cpt.dt[cpt.ix].length; i++) {
-			let funky = cpt.dt[cpt.ix][i].Fct;
+		for (let i = 0; i < cpt.data[cpt.index].length; i++) {
+			let funky = cpt.data[cpt.index][i].Fct;
 			if (funky == "fillRect") {
-				dataLines += '<rect x="' + cpt.dt[cpt.ix][i].X  + '" y="' + cpt.dt[cpt.ix][i].Y + '" width="' + cpt.dt[cpt.ix][i].W + '" height="' + cpt.dt[cpt.ix][i].H + '" style="fill:rgb(0,0,0);" />';
+				dataLines += '<rect x="' + cpt.data[cpt.index][i].X  + '" y="' + cpt.data[cpt.index][i].Y + '" width="' + cpt.data[cpt.index][i].W + '" height="' + cpt.data[cpt.index][i].H + '" style="fill:rgb(0,0,0);" />';
 			}
 			else if (funky == "strokeRect") {
-				dataLines += '<rect x="' + cpt.dt[cpt.ix][i].X  + '" y="' + cpt.dt[cpt.ix][i].Y + '" width="' + cpt.dt[cpt.ix][i].W + '" height="' + cpt.dt[cpt.ix][i].H + '" style="fill:rgb(0,0,0);" />';
+				dataLines += '<rect x="' + cpt.data[cpt.index][i].X  + '" y="' + cpt.data[cpt.index][i].Y + '" width="' + cpt.data[cpt.index][i].W + '" height="' + cpt.data[cpt.index][i].H + '" style="fill:rgb(0,0,0);" />';
 			}			
 		}
 		var lastLine = '</svg>';
@@ -424,9 +424,9 @@ var captainCanvas = function(canvas, tools, settings) {
         + '</title>\r\n</head>\r\n<body>\r\n<canvas id="' 
         + name 
         + '" width="' 
-        + cpt.id.getAttribute("width") 
+        + cpt.elem.getAttribute("width") 
         + '" height="' 
-        + cpt.id.getAttribute("height")  
+        + cpt.elem.getAttribute("height")  
         + '"></canvas>\r\n<script>\r\n'		
         + 'var '
         + name
@@ -434,13 +434,13 @@ var captainCanvas = function(canvas, tools, settings) {
         + name
         + '").getContext("2d");\r\n';
 		
-		for (let i = 0; i < cpt.dt[cpt.ix].length; i++) {	
-			let p = cpt.dt[cpt.ix][i];
+		for (let i = 0; i < cpt.data[cpt.index].length; i++) {	
+			let p = cpt.data[cpt.index][i];
 			let isAtr = false;
 			let add = name + '.' + p.Fct + "(";
 			for (let j in p) {				
 				if (p.hasOwnProperty(j)) {
-					if (j != "Fct") {
+					if (j !== "Fct") {
 						if (j == "Value") {
 							add = name + "." + p.Fct + " = '" + p[j] + "';\r\n";
 							isAtr = true;
@@ -453,7 +453,7 @@ var captainCanvas = function(canvas, tools, settings) {
 				}				
 			}
 			if (!isAtr) {
-				if (add.indexOf(',') != -1) {
+				if (add.indexOf(',') !== -1) {
 					add = add.slice(0,-1);
 				}
 				add += ');\r\n'
@@ -467,7 +467,7 @@ var captainCanvas = function(canvas, tools, settings) {
     };
 	cpt.wpng = function (fil) {
 		cpt.dat();
-		cpt.down((fil ? fil : "captainCanvas")  + ".png", "data:image/png;base64;" + cpt.id.toDataURL());
+		cpt.down((fil ? fil : "captainCanvas")  + ".png", "data:image/png;base64;" + cpt.elem.toDataURL());
 	};
 	cpt.down = function (filename, txt) {
 		var l = document.createElement("a");
@@ -483,15 +483,15 @@ var captainCanvas = function(canvas, tools, settings) {
 		}
 	};
 	cpt.moveMouse = function (mrX, mrY) {
-		    cpt.brs.Slc = document.getElementsByClassName(cpt.tl.id + "_selectedFunction")[0].value;
-			if (cpt.brs.Slc != "Linie" && cpt.brs.Slc.indexOf("Figur") == -1) {
+		    cpt.brush.Slc = document.getElementsByClassName(cpt.tools.id + "_selectedFunction")[0].value;
+			if (cpt.brush.Slc !== "Linie" && cpt.brush.Slc.indexOf("Figur") === -1) {
 				cpt.dim();
 				cpt.drw(mrX, mrY);
 			}
-			else if (cpt.brs.Slc == "Linie") {
-				if (cpt.brs.LastX != null || cpt.brs.LastY != null) {
-					let x = mrX - (cpt.id.getBoundingClientRect().left + window.scrollX);
-					let y = mrY - (cpt.id.getBoundingClientRect().top + window.scrollY);
+			else if (cpt.brush.Slc === "Linie") {
+				if (cpt.brush.LastX !== null || cpt.brush.LastY !== null) {
+					let x = mrX - (cpt.elem.getBoundingClientRect().left + window.scrollX);
+					let y = mrY - (cpt.elem.getBoundingClientRect().top + window.scrollY);
 					cpt.dim();
 					cpt.dat();					  
 					cpt.drafi("lineTo", x, y);
@@ -499,23 +499,23 @@ var captainCanvas = function(canvas, tools, settings) {
 					cpt.drafi("stroke");
 				}
 			}
-            else if (cpt.brs.Slc.indexOf("Figur") != -1) {
-                if (cpt.brs.LastX != null || cpt.brs.LastY != null) {
-					let x = mrX - (cpt.id.getBoundingClientRect().left + window.scrollX);
-					let y = mrY - (cpt.id.getBoundingClientRect().top + window.scrollY);
+            else if (cpt.brush.Slc.indexOf("Figur") !== -1) {
+				if (cpt.brush.LastX !== null || cpt.brush.LastY !== null) {
+					let x = mrX - (cpt.elem.getBoundingClientRect().left + window.scrollX);
+					let y = mrY - (cpt.elem.getBoundingClientRect().top + window.scrollY);
 					cpt.dim();
 					cpt.dat();
-                    for (let i = 0; i < cpt.brs.Buff.length; i++) {
-                        cpt.drafi(cpt.brs.Buff[i].Fct, 
-					        cpt.brs.Buff[i].X, 
-					        cpt.brs.Buff[i].Y
+                    for (let i = 0; i < cpt.brush.Buff.length; i++) {
+                        cpt.drafi(cpt.brush.Buff[i].Fct, 
+					        cpt.brush.Buff[i].X, 
+					        cpt.brush.Buff[i].Y
 				        );
                     }					  
 					cpt.drafi("lineTo", x, y);
 					cpt.drafi("closePath");
 					cpt.drafi("stroke");
-                    if (cpt.brs.Buff.length > 0) {
-                        if (x >= (cpt.brs.Buff[1].X - 5) && x <= (cpt.brs.Buff[1].X + 5) && y >= (cpt.brs.Buff[1].Y - 5) && y <= (cpt.brs.Buff[1].Y + 5)) {
+                    if (cpt.brush.Buff.length > 0) {
+                        if (x >= (cpt.brush.Buff[1].X - 5) && x <= (cpt.brush.Buff[1].X + 5) && y >= (cpt.brush.Buff[1].Y - 5) && y <= (cpt.brush.Buff[1].Y + 5)) {
                             // cpt.drafi("fillRect", x, y, 25, 25);
                             cpt.drafi("closePath");
                             cpt.drafi("fill");
@@ -527,418 +527,429 @@ var captainCanvas = function(canvas, tools, settings) {
 	};
 	cpt.init = function () {
 		/* Init toggle in-out toolBox */
-		cpt.tl.addEventListener("mouseenter", function() {
-			cpt.set.foc = true;
+		cpt.tools.addEventListener("mouseenter", function() {
+			cpt.settings.foc = true;
 		});
-		cpt.tl.addEventListener("mouseleave", function() {
-			cpt.set.foc = false;
+		cpt.tools.addEventListener("mouseleave", function() {
+			cpt.settings.foc = false;
 		});
         /* Hide cursor when above drawing area */
-                // cpt.id.style.cursor = "none";
-                // cpt.id.style.webkitCursor = "none";
+        		// cpt.elem.style.cursor = "none";
+                //cpt.elem.style.webkitCursor = "none";
 		/* Tool Box Contents */
 			/* Heading */
-				cpt.tl.appendChild(document.createElement("h1"));
-                cpt.tl.getElementsByTagName("h1")[0].innerHTML =  cpt.set.lan ? "V&aelig;rkt&oslash;jer : " : "Tools : ";
+				cpt.tools.appendChild(document.createElement("h1"));
+                cpt.tools.getElementsByTagName("h1")[0].innerHTML =  cpt.settings.lan ? "V&aelig;rkt&oslash;jer : " : "Tools : ";
 			/* Brush Heading */
 				var brush = document.createElement("h3");
-				brush.innerHTML = cpt.set.lan ? "Pensel : " : "Brush : "
-				cpt.tl.appendChild(brush);
+				brush.innerHTML = cpt.settings.lan ? "Pensel : " : "Brush : "
+				cpt.tools.appendChild(brush);
 			/* Selected Function */
             	var selectFuncLabel = document.createElement("label");
-				selectFuncLabel.innerHTML = cpt.set.lan ? "Funktion : &nbsp;" : "Function : &nbsp;";
-				cpt.tl.appendChild(selectFuncLabel);				
-				cpt.tl.appendChild(document.createElement("select"));
-				cpt.tl.getElementsByTagName("select")[0].className = cpt.tl.id + "_selectedFunction";
-				var funky = cpt.fct.sort();
+				selectFuncLabel.innerHTML = cpt.settings.lan ? "Funktion : &nbsp;" : "Function : &nbsp;";
+				cpt.tools.appendChild(selectFuncLabel);				
+				cpt.tools.appendChild(document.createElement("select"));
+				cpt.tools.getElementsByTagName("select")[0].className = cpt.tools.id + "_selectedFunction";
+				var funky = cpt.methods.sort();
 				for (let i = 0; i < funky.length; i++) {
-					document.getElementsByClassName(cpt.tl.id + "_selectedFunction")[0].innerHTML += "<option value='" + funky[i] + "'>" + funky[i] + "</option>";
+					document.getElementsByClassName(cpt.tools.id + "_selectedFunction")[0].innerHTML += "<option value='" + funky[i] + "'>" + funky[i] + "</option>";
 				}
-				// document.getElementsByClassName(cpt.tl.id + "_selectedFunction")[0].addEventListener("change", cpt.dat);
-                cpt.tl.appendChild(document.createElement("br"));
+				// document.getElementsByClassName(cpt.tools.id + "_selectedFunction")[0].addEventListener("change", cpt.dat);
+                cpt.tools.appendChild(document.createElement("br"));
             /* Selected Height, Width And Linewidth */
             	var heightLabel = document.createElement("label");
-				heightLabel.innerHTML = cpt.set.lan ? "H&oslash;jde : &nbsp;" : "Height : &nbsp;";
-				cpt.tl.appendChild(heightLabel);
+				heightLabel.innerHTML = cpt.settings.lan ? "H&oslash;jde : &nbsp;" : "Height : &nbsp;";
+				cpt.tools.appendChild(heightLabel);
                 var height = document.createElement("input");
 				height.value = "20";
 				height.setAttribute("type", "number");
-				height.className = cpt.tl.id + "_height";
-				cpt.tl.appendChild(height);
-                // document.getElementsByClassName(cpt.tl.id + "_height")[0].addEventListener("change", cpt.dim);
-                cpt.tl.appendChild(document.createElement("br"));
+				height.className = cpt.tools.id + "_height";
+				cpt.tools.appendChild(height);
+                // document.getElementsByClassName(cpt.tools.id + "_height")[0].addEventListener("change", cpt.dim);
+                cpt.tools.appendChild(document.createElement("br"));
                 var widthLabel = document.createElement("label");
-				widthLabel.innerHTML = cpt.set.lan ? "Bredde : &nbsp;" : "Width : &nbsp;";
-				cpt.tl.appendChild(widthLabel);	
+				widthLabel.innerHTML = cpt.settings.lan ? "Bredde : &nbsp;" : "Width : &nbsp;";
+				cpt.tools.appendChild(widthLabel);	
                 var width = document.createElement("input");
 				width.value = "20";
 				width.setAttribute("type", "number");
-				width.className = cpt.tl.id + "_width";
-				cpt.tl.appendChild(width);
-                // document.getElementsByClassName(cpt.tl.id + "_width")[0].addEventListener("change", cpt.dim);
-                cpt.tl.appendChild(document.createElement("br"));
+				width.className = cpt.tools.id + "_width";
+				cpt.tools.appendChild(width);
+                // document.getElementsByClassName(cpt.tools.id + "_width")[0].addEventListener("change", cpt.dim);
+                cpt.tools.appendChild(document.createElement("br"));
 				var linewidthLabel = document.createElement("label");
-				linewidthLabel.innerHTML = cpt.set.lan ? "Linie : &nbsp;" : "Line : &nbsp;";
-				cpt.tl.appendChild(linewidthLabel);	
+				linewidthLabel.innerHTML = cpt.settings.lan ? "Linie : &nbsp;" : "Line : &nbsp;";
+				cpt.tools.appendChild(linewidthLabel);	
                 var linewidth = document.createElement("input");
 				linewidth.value = "1";
 				linewidth.setAttribute("type", "number");
-				linewidth.className = cpt.tl.id + "_lineWidth";
-				cpt.tl.appendChild(linewidth);
-				document.getElementsByClassName(cpt.tl.id + "_lineWidth")[0].addEventListener("change", cpt.clw);				
-                cpt.tl.appendChild(document.createElement("br"));
+				linewidth.className = cpt.tools.id + "_lineWidth";
+				cpt.tools.appendChild(linewidth);
+				document.getElementsByClassName(cpt.tools.id + "_lineWidth")[0].addEventListener("change", cpt.clw);				
+                cpt.tools.appendChild(document.createElement("br"));
             /* Selected Colours*/
                 var selectColLabel = document.createElement("label");
-				selectColLabel.innerHTML = cpt.set.lan ? "Fyldfarve : &nbsp;" : "Fill : &nbsp;";
-                cpt.tl.appendChild(selectColLabel);
+				selectColLabel.innerHTML = cpt.settings.lan ? "Fyldfarve : &nbsp;" : "Fill : &nbsp;";
+                cpt.tools.appendChild(selectColLabel);
                 var colSelect = document.createElement("select")
-                colSelect.className = cpt.tl.id + "_selectedFill";
-                cpt.tl.appendChild(colSelect);
-                for (let i = 0; i < cpt.col.length; i++) {
-                    document.getElementsByClassName(cpt.tl.id + "_selectedFill")[0].innerHTML += "<option style='background: " + cpt.col[i] + " ;' value='" + cpt.col[i] + "'>" + cpt.col[i] + "</option>";
+                colSelect.className = cpt.tools.id + "_selectedFill";
+                cpt.tools.appendChild(colSelect);
+                for (let i = 0; i < cpt.colours.length; i++) {
+                    document.getElementsByClassName(cpt.tools.id + "_selectedFill")[0].innerHTML += "<option style='background: " + cpt.colours[i] + " ;' value='" + cpt.colours[i] + "'>" + cpt.colours[i] + "</option>";
                 }
-				document.getElementsByClassName(cpt.tl.id + "_selectedFill")[0].getElementsByTagName("option")[cpt.col.indexOf("Black")].setAttribute("selected","");
-				document.getElementsByClassName(cpt.tl.id + "_selectedFill")[0].addEventListener("change",cpt.cfl);
-                cpt.tl.appendChild(document.createElement("br"));
+				document.getElementsByClassName(cpt.tools.id + "_selectedFill")[0].getElementsByTagName("option")[cpt.colours.indexOf("Black")].setAttribute("selected","");
+				document.getElementsByClassName(cpt.tools.id + "_selectedFill")[0].addEventListener("change",cpt.cfl);
+                cpt.tools.appendChild(document.createElement("br"));
                 var selectFilLabel = document.createElement("label");
-				selectFilLabel.innerHTML = cpt.set.lan ? "Stregfarve : &nbsp;" : "Stroke : &nbsp;";
-                cpt.tl.appendChild(selectFilLabel);
+				selectFilLabel.innerHTML = cpt.settings.lan ? "Stregfarve : &nbsp;" : "Stroke : &nbsp;";
+                cpt.tools.appendChild(selectFilLabel);
                 var filSelect = document.createElement("select")
-                filSelect.className = cpt.tl.id + "_selectedStroke";
-                cpt.tl.appendChild(filSelect);
-                for (let i = 0; i < cpt.col.length; i++) {
-                    document.getElementsByClassName(cpt.tl.id + "_selectedStroke")[0].innerHTML += "<option style='background: " + cpt.col[i] + " ;' value='" + cpt.col[i] + "'>" + cpt.col[i] + "</option>";
+                filSelect.className = cpt.tools.id + "_selectedStroke";
+                cpt.tools.appendChild(filSelect);
+                for (let i = 0; i < cpt.colours.length; i++) {
+                    document.getElementsByClassName(cpt.tools.id + "_selectedStroke")[0].innerHTML += "<option style='background: " + cpt.colours[i] + " ;' value='" + cpt.colours[i] + "'>" + cpt.colours[i] + "</option>";
                 }
-				document.getElementsByClassName(cpt.tl.id + "_selectedStroke")[0].getElementsByTagName("option")[cpt.col.indexOf("Transparent")].setAttribute("selected","");
-				document.getElementsByClassName(cpt.tl.id + "_selectedStroke")[0].addEventListener("change",cpt.cst);
-                cpt.tl.appendChild(document.createElement("br"));
-                cpt.tl.appendChild(document.createElement("br"));
+				document.getElementsByClassName(cpt.tools.id + "_selectedStroke")[0].getElementsByTagName("option")[cpt.colours.indexOf("Transparent")].setAttribute("selected","");
+				document.getElementsByClassName(cpt.tools.id + "_selectedStroke")[0].addEventListener("change",cpt.cst);
+                cpt.tools.appendChild(document.createElement("br"));
+                cpt.tools.appendChild(document.createElement("br"));
             /* Import Heading */
 				var imp = document.createElement("h3");
-				imp.innerHTML = cpt.set.lan ? "Hent fil : " : "Load file : "
-				cpt.tl.appendChild(imp);
+				imp.innerHTML = cpt.settings.lan ? "Hent fil : " : "Load file : "
+				cpt.tools.appendChild(imp);
 			/* Import JSON */
 				var importJSONLabel = document.createElement("label");
-				importJSONLabel.innerHTML = cpt.set.lan ? "Hent JSON : &nbsp;" : "Load JSON : &nbsp;";
-				cpt.tl.appendChild(importJSONLabel);
+				importJSONLabel.innerHTML = cpt.settings.lan ? "Hent JSON : &nbsp;" : "Load JSON : &nbsp;";
+				cpt.tools.appendChild(importJSONLabel);
 				var importJSON = document.createElement("input");
 				// importJSON.value = "Hent JSON";
 				importJSON.setAttribute("type", "file");
-				importJSON.className = cpt.tl.id + "_importJSON";
-				cpt.tl.appendChild(importJSON);
-				document.getElementsByClassName(cpt.tl.id + "_importJSON")[0].addEventListener("change", function(event) {
+				importJSON.className = cpt.tools.id + "_importJSON";
+				cpt.tools.appendChild(importJSON);
+				document.getElementsByClassName(cpt.tools.id + "_importJSON")[0].addEventListener("change", function(event) {
 					cpt.rjsn(this);
 				});
-				cpt.tl.appendChild(document.createElement("br"));
-				cpt.tl.appendChild(document.createElement("br"));
+				cpt.tools.appendChild(document.createElement("br"));
+				cpt.tools.appendChild(document.createElement("br"));
             /* Export Heading */
 				var exp = document.createElement("h3");
-				exp.innerHTML = cpt.set.lan ? "Gem fil : " : "Save file : ";
-				cpt.tl.appendChild(exp);
+				exp.innerHTML = cpt.settings.lan ? "Gem fil : " : "Save file : ";
+				cpt.tools.appendChild(exp);
 			/* Export File Name */
 				var fileName = document.createElement("input");
-				fileName.setAttribute("placeholder", cpt.set.lan ? "Filnavn" : "File Name");
+				fileName.setAttribute("placeholder", cpt.settings.lan ? "Filnavn" : "File Name");
 				fileName.setAttribute("type", "text");
-				fileName.className = cpt.tl.id + "_fileName";
-				cpt.tl.appendChild(fileName);		
+				fileName.className = cpt.tools.id + "_fileName";
+				cpt.tools.appendChild(fileName);		
 			/* Export JSON */
 				var exportJSON = document.createElement("input");
-				exportJSON.value = cpt.set.lan ? "Gem JSON" : "Save JSON";
+				exportJSON.value = cpt.settings.lan ? "Gem JSON" : "Save JSON";
 				exportJSON.setAttribute("type", "button");
-				exportJSON.className = cpt.tl.id + "_exportJSON";
-				cpt.tl.appendChild(exportJSON);
-				document.getElementsByClassName(cpt.tl.id + "_exportJSON")[0].addEventListener("click", function() {
-					cpt.wjsn(document.getElementsByClassName(cpt.tl.id + "_fileName")[0].value);
+				exportJSON.className = cpt.tools.id + "_exportJSON";
+				cpt.tools.appendChild(exportJSON);
+				document.getElementsByClassName(cpt.tools.id + "_exportJSON")[0].addEventListener("click", function() {
+					cpt.wjsn(document.getElementsByClassName(cpt.tools.id + "_fileName")[0].value);
 				});
 			/* Export SVG */
 				var exportSVG = document.createElement("input");
-				exportSVG.value = cpt.set.lan ? "Gem SVG" : "Save SVG";
+				exportSVG.value = cpt.settings.lan ? "Gem SVG" : "Save SVG";
 				exportSVG.setAttribute("type", "button");
 				exportSVG.setAttribute("disabled", "");
-				exportSVG.className = cpt.tl.id + "_exportSVG";
-				cpt.tl.appendChild(exportSVG);
-				document.getElementsByClassName(cpt.tl.id + "_exportSVG")[0].addEventListener("click", function() {
-					cpt.wsvg(document.getElementsByClassName(cpt.tl.id + "_fileName")[0].value);
+				exportSVG.className = cpt.tools.id + "_exportSVG";
+				cpt.tools.appendChild(exportSVG);
+				document.getElementsByClassName(cpt.tools.id + "_exportSVG")[0].addEventListener("click", function() {
+					cpt.wsvg(document.getElementsByClassName(cpt.tools.id + "_fileName")[0].value);
 				});
             /* Export HTML Canvas */
 				var exportHtml = document.createElement("input");
-				exportHtml.value = cpt.set.lan ? "Gem HTML" : "Save HTML";
+				exportHtml.value = cpt.settings.lan ? "Gem HTML" : "Save HTML";
 				exportHtml.setAttribute("type", "button");
-				exportHtml.className = cpt.tl.id + "_exportHtml";
-				cpt.tl.appendChild(exportHtml);
-				document.getElementsByClassName(cpt.tl.id + "_exportHtml")[0].addEventListener("click", function() {
-					cpt.whtm(document.getElementsByClassName(cpt.tl.id + "_fileName")[0].value);
+				exportHtml.className = cpt.tools.id + "_exportHtml";
+				cpt.tools.appendChild(exportHtml);
+				document.getElementsByClassName(cpt.tools.id + "_exportHtml")[0].addEventListener("click", function() {
+					cpt.whtm(document.getElementsByClassName(cpt.tools.id + "_fileName")[0].value);
 				});
 			/* Export PNG */
 				var exportPNG = document.createElement("input");
-				exportPNG.value = cpt.set.lan ? "Gem PNG" : "Save PNG";
+				exportPNG.value = cpt.settings.lan ? "Gem PNG" : "Save PNG";
 				exportPNG.setAttribute("type", "button");
-				exportPNG.className = cpt.tl.id + "_exportPNG";
-				cpt.tl.appendChild(exportPNG);
-				document.getElementsByClassName(cpt.tl.id + "_exportPNG")[0].addEventListener("click", function() {
-					cpt.wpng(document.getElementsByClassName(cpt.tl.id + "_fileName")[0].value);
+				exportPNG.className = cpt.tools.id + "_exportPNG";
+				cpt.tools.appendChild(exportPNG);
+				document.getElementsByClassName(cpt.tools.id + "_exportPNG")[0].addEventListener("click", function() {
+					cpt.wpng(document.getElementsByClassName(cpt.tools.id + "_fileName")[0].value);
 				});
-                cpt.tl.appendChild(document.createElement("br"));
+                cpt.tools.appendChild(document.createElement("br"));
 			/* Data Level Area */
                 var lel = document.createElement("span");
-                lel.innerHTML = cpt.set.lan ? "Rediger Niveau : " : "Edit Level : ";
-                cpt.tl.appendChild(lel);
+                lel.innerHTML = cpt.settings.lan ? "Rediger Niveau : " : "Edit Level : ";
+                cpt.tools.appendChild(lel);
                 var ltg = document.createElement("input");
                 ltg.setAttribute("type", "checkbox");                
-                ltg.className = cpt.tl.id + "_levelToggler";
-                cpt.tl.appendChild(ltg);
-                document.getElementsByClassName(cpt.tl.id + "_levelToggler")[0].addEventListener("change", function(event) {
+                ltg.className = cpt.tools.id + "_levelToggler";
+                cpt.tools.appendChild(ltg);
+                document.getElementsByClassName(cpt.tools.id + "_levelToggler")[0].addEventListener("change", function(event) {
                     if (this.checked) {
-                        document.getElementsByClassName(cpt.tl.id + "_dataLevelArea")[0].style.display = "block";
+                        document.getElementsByClassName(cpt.tools.id + "_dataLevelArea")[0].style.display = "block";
 						cpt.refl();
                     }
                     else {
-                        document.getElementsByClassName(cpt.tl.id + "_dataLevelArea")[0].style.display = "none";
+                        document.getElementsByClassName(cpt.tools.id + "_dataLevelArea")[0].style.display = "none";
                     }
                 });
 				var ltf = document.createElement("div");
                 ltf.style.cssText = "display: none;";
-                ltf.className = cpt.tl.id + "_dataLevelArea";
-                cpt.tl.appendChild(ltf);
-				var lev = document.getElementsByClassName(cpt.tl.id + "_dataLevelArea")[0];
+                ltf.className = cpt.tools.id + "_dataLevelArea";
+                cpt.tools.appendChild(ltf);
+				var lev = document.getElementsByClassName(cpt.tools.id + "_dataLevelArea")[0];
 				var lll = document.createElement("span");
-                lll.innerHTML = cpt.set.lan ? "Niveau : " : "Level : ";
+                lll.innerHTML = cpt.settings.lan ? "Niveau : " : "Level : ";
                 lev.appendChild(lll);
-                cpt.tl.appendChild(document.createElement("br"));
+                cpt.tools.appendChild(document.createElement("br"));
 				var lfs = document.createElement("select");
-                lfs.className = cpt.tl.id + "_dataLevelSelect";
+                lfs.className = cpt.tools.id + "_dataLevelSelect";
                 lev.appendChild(lfs);
-				var lse = document.getElementsByClassName(cpt.tl.id + "_dataLevelSelect")[0];
+				var lse = document.getElementsByClassName(cpt.tools.id + "_dataLevelSelect")[0];
 				cpt.refl();
                 lse.addEventListener("change", function (event) {
-                    cpt.ix = this.value;
+                    cpt.index = this.value;
                 });
 				var ltb = document.createElement("input");
                 ltb.setAttribute("type", "button");
-				ltb.value = cpt.set.lan ? "Tilføj" : "Add";
-                ltb.className = cpt.tl.id + "_dataLevelAdd";
+				ltb.value = cpt.settings.lan ? "Tilføj" : "Add";
+                ltb.className = cpt.tools.id + "_dataLevelAdd";
                 lev.appendChild(ltb);
-				document.getElementsByClassName(cpt.tl.id + "_dataLevelAdd")[0].addEventListener("click", function() {
-						cpt.dt.push([]);
+				document.getElementsByClassName(cpt.tools.id + "_dataLevelAdd")[0].addEventListener("click", function() {
+						cpt.data.push([]);
 						cpt.refl();
 				});
 				var ltr = document.createElement("input");
                 ltr.setAttribute("type", "button");
-				ltr.value = cpt.set.lan ? "Fjern sidste" : "Remove last";
-                ltr.className = cpt.tl.id + "_dataLevelRemove";
+				ltr.value = cpt.settings.lan ? "Fjern sidste" : "Remove last";
+                ltr.className = cpt.tools.id + "_dataLevelRemove";
                 lev.appendChild(ltr);
-				document.getElementsByClassName(cpt.tl.id + "_dataLevelRemove")[0].addEventListener("click", function() {
-					if (cpt.dt.length > 1) {
-						cpt.dt.pop();
+				document.getElementsByClassName(cpt.tools.id + "_dataLevelRemove")[0].addEventListener("click", function() {
+					if (cpt.data.length > 1) {
+						cpt.data.pop();
 						cpt.refl();
 					}
 				});
 				var ltu = document.createElement("input");
                 ltu.setAttribute("type", "button");
-				ltu.value = cpt.set.lan ? "Flyt op" : "Move up";
-                ltu.className = cpt.tl.id + "_dataLevelMoveUp";
+				ltu.value = cpt.settings.lan ? "Flyt op" : "Move up";
+                ltu.className = cpt.tools.id + "_dataLevelMoveUp";
                 lev.appendChild(ltu);
-				document.getElementsByClassName(cpt.tl.id + "_dataLevelMoveUp")[0].addEventListener("click", function() {
-					if (cpt.dt.length > 1 && cpt.ix != (cpt.dt.length - 1)) {
-						let index = cpt.ix;
-						//alert(cpt.dt[index]);
-						let lvl1 = cpt.dt[index]; //cpt.dt[index] ? JSON.parse(cpt.dt[index]) : [];
+				document.getElementsByClassName(cpt.tools.id + "_dataLevelMoveUp")[0].addEventListener("click", function() {
+					if (cpt.data.length > 1 && cpt.index !== (cpt.data.length - 1)) {
+						let index = cpt.index;
+						//alert(cpt.data[index]);
+						let lvl1 = cpt.data[index]; //cpt.data[index] ? JSON.parse(cpt.data[index]) : [];
 						//alert(lvl1);
-						let lvl2 = cpt.dt[index + 1]; //cpt.dt[cpt.ix + 1] ? JSON.parse(cpt.dt[cpt.ix + 1]) : [];
-						cpt.dt[index] = lvl2;
-						cpt.dt[index + 1] = lvl1;
-						//cpt.dt.splice(index, 2, lvl2, lvl1);
-						// cpt.dt.splice(cpt.ix, 2, cpt.dt[cpt.ix + 1], cpt.dt[cpt.ix]);
+						let lvl2 = cpt.data[index + 1]; //cpt.data[cpt.index + 1] ? JSON.parse(cpt.data[cpt.index + 1]) : [];
+						cpt.data[index] = lvl2;
+						cpt.data[index + 1] = lvl1;
+						//cpt.data.splice(index, 2, lvl2, lvl1);
+						// cpt.data.splice(cpt.index, 2, cpt.data[cpt.index + 1], cpt.data[cpt.index]);
 						cpt.refl();
 					}
 				});
 			/* Edit Data Toggler */
                 var dtt = document.createElement("span");
-                dtt.innerHTML = cpt.set.lan ? "Rediger Data : " : "Edit Data : ";
-                cpt.tl.appendChild(dtt);
+                dtt.innerHTML = cpt.settings.lan ? "Rediger Data : " : "Edit Data : ";
+                cpt.tools.appendChild(dtt);
                 var dtg = document.createElement("input");
                 dtg.setAttribute("type", "checkbox");                
-                dtg.className = cpt.tl.id + "_dataToggler";
-                cpt.tl.appendChild(dtg);
-                document.getElementsByClassName(cpt.tl.id + "_dataToggler")[0].addEventListener("change", function(event) {
+                dtg.className = cpt.tools.id + "_dataToggler";
+                cpt.tools.appendChild(dtg);
+                document.getElementsByClassName(cpt.tools.id + "_dataToggler")[0].addEventListener("change", function(event) {
                     if (this.checked) {
-                        document.getElementsByClassName(cpt.tl.id + "_dataEditArea")[0].value = JSON.stringify(cpt.dt[cpt.ix]);
-                        document.getElementsByClassName(cpt.tl.id + "_dataEditArea")[0].style.display = "block";
+                        document.getElementsByClassName(cpt.tools.id + "_dataEditArea")[0].value = JSON.stringify(cpt.data[cpt.index]);
+                        document.getElementsByClassName(cpt.tools.id + "_dataEditArea")[0].style.display = "block";
                     }
                     else {
-                        document.getElementsByClassName(cpt.tl.id + "_dataEditArea")[0].value = "";
-                        document.getElementsByClassName(cpt.tl.id + "_dataEditArea")[0].style.display = "none";
+                        document.getElementsByClassName(cpt.tools.id + "_dataEditArea")[0].value = "";
+                        document.getElementsByClassName(cpt.tools.id + "_dataEditArea")[0].style.display = "none";
                     }
                 });
-                cpt.tl.appendChild(document.createElement("br"));
+                cpt.tools.appendChild(document.createElement("br"));
 			/* Data Edit Area */
                 var dtf = document.createElement("textarea");
                 dtf.style.cssText = "height: 200px; width: 95%; overflow-y : auto; display: none;";
-                dtf.className = cpt.tl.id + "_dataEditArea";
-                cpt.tl.appendChild(dtf);
-                document.getElementsByClassName(cpt.tl.id + "_dataEditArea")[0].addEventListener("blur", function(event) {
-                    cpt.dt[cpt.ix] = JSON.parse(this.value);
+                dtf.className = cpt.tools.id + "_dataEditArea";
+                cpt.tools.appendChild(dtf);
+                document.getElementsByClassName(cpt.tools.id + "_dataEditArea")[0].addEventListener("blur", function(event) {
+                    cpt.data[cpt.index] = JSON.parse(this.value);
                 });
 		/* Tool Box Toggler */
-		if (cpt.set.tog) {
-			cpt.tl.style.cssText = "position: fixed; right: 0; top: 0; z-index: 98; width: 30vw;"; // overflow-y : auto;
+		if (cpt.settings.tog) {
+			cpt.tools.style.cssText = "position: fixed; right: 0; top: 0; z-index: 98; width: 30vw;"; // overflow-y : auto;
 			let toggler = document.createElement("span");
 			let txt = document.createElement("span");
 			let chk = document.createElement("input");
-			toggler.id = cpt.tl.id + "_toggleBandit";
+			toggler.id = cpt.tools.id + "_toggleBandit";
 			toggler.style.cssText = "position: fixed; right: 0; bottom: 0; z-index: 99; color: rgba(155,155,155,0.8);";
-			txt.innerHTML = cpt.set.lan ? "Gem V&aelig;rkt&oslash;jer" : "Hide Tools";
+			txt.innerHTML = cpt.settings.lan ? "Gem V&aelig;rkt&oslash;jer" : "Hide Tools";
 			toggler.appendChild(txt);
 			chk.setAttribute("type", "checkbox");
-			chk.id = cpt.tl.id + "_toolToggler";			
+			chk.id = cpt.tools.id + "_toolToggler";			
 			toggler.appendChild(chk);
 			document.body.appendChild(toggler);
-			document.getElementById(cpt.tl.id + "_toolToggler").addEventListener("click", function(event) {
-				cpt.tl.style.display = !this.checked ?  "block" : "none";
+			document.getElementById(cpt.tools.id + "_toolToggler").addEventListener("click", function(event) {
+				cpt.tools.style.display = !this.checked ?  "block" : "none";
 			});			
 		}
 		/* Default Events */
-		if (cpt.set.evt) {
-			cpt.id.addEventListener("mousemove", function(event) {
+		if (cpt.settings.evt) {
+			cpt.elem.addEventListener("mousemove", function(event) {
 				cpt.moveMouse(event.pageX, event.pageY);
 				/* Update Cursor */
-				cpt.brs.CursX = event.pageX;
-				cpt.brs.CursY = event.pageY;
-		});
-		cpt.id.addEventListener("mousedown", function(event) { 
-			cpt.drg = true;	
-            cpt.brs.Slc = document.getElementsByClassName(cpt.tl.id + "_selectedFunction")[0].value;
-			if (cpt.brs.Slc != "Linie" && cpt.brs.Slc.indexOf("Figur") == -1) {				
-				cpt.dim();
-				cpt.drw(event.pageX, event.pageY);
-			}
-			else if (cpt.brs.Slc == "Linie") {
-				let x = event.pageX - (cpt.id.getBoundingClientRect().left + window.scrollX); // event.pageX - cpt.id.offsetLeft;
-				let y = event.pageY - (cpt.id.getBoundingClientRect().top + window.scrollY); // event.pageY - cpt.id.offsetTop;
-				if (cpt.brs.LastX == null || cpt.brs.LastY == null) {
-					cpt.dt[cpt.ix].push({"Fct" : "beginPath" });
-					cpt.dt[cpt.ix].push({"Fct" : "moveTo", "X" : x, "Y" : y });
-					cpt.brs.LastX = x;
-					cpt.brs.LastY = y;
+				cpt.brush.CursX = event.pageX;
+				cpt.brush.CursY = event.pageY;
+			});
+			cpt.elem.addEventListener("touchmove", function(event) {
+				for (const evt of event.touches) {
+					event.preventDefault();
+					cpt.drg = true;	
+					cpt.moveMouse(evt.clientX, evt.clientY);
+					/* Update Cursor */
+					cpt.brush.CursX = evt.clientX;
+					cpt.brush.CursY = evt.clientY;
+					cpt.drg = false;	
+				}
+			});
+			cpt.elem.addEventListener("mousedown", function(event) { 
+				cpt.drg = true;	
+				cpt.brush.Slc = document.getElementsByClassName(cpt.tools.id + "_selectedFunction")[0].value;
+				if (cpt.brush.Slc !== "Linie" && cpt.brush.Slc.indexOf("Figur") === -1) {				
+					cpt.dim();
+					cpt.drw(event.pageX, event.pageY);
+				}
+				else if (cpt.brush.Slc == "Linie") {
+					let x = event.pageX - (cpt.elem.getBoundingClientRect().left + window.scrollX); // event.pageX - cpt.elem.offsetLeft;
+					let y = event.pageY - (cpt.elem.getBoundingClientRect().top + window.scrollY); // event.pageY - cpt.elem.offsetTop;
+					if (cpt.brush.LastX == null || cpt.brush.LastY == null) {
+						cpt.data[cpt.index].push({"Fct" : "beginPath" });
+						cpt.data[cpt.index].push({"Fct" : "moveTo", "X" : x, "Y" : y });
+						cpt.brush.LastX = x;
+						cpt.brush.LastY = y;
+					}
+					else {
+						cpt.data[cpt.index].push({"Fct" : "lineTo", "X" : x, "Y" : y });	
+						cpt.data[cpt.index].push({"Fct" : "stroke" });
+						cpt.dim();
+						cpt.dat();	
+						cpt.brush.LastX = null;
+						cpt.brush.LastY = null;
+					}
+				}            
+				else if (cpt.brush.Slc.indexOf("Figur") !== -1) {
+					let x = event.pageX - (cpt.elem.getBoundingClientRect().left + window.scrollX);
+					let y = event.pageY - (cpt.elem.getBoundingClientRect().top + window.scrollY);
+					// let x = event.pageX - cpt.elem.offsetLeft;
+					// let y = event.pageY - cpt.elem.offsetTop;
+					let reset = false;
+					
+					if (cpt.brush.Buff.length > 0) {
+						// console.log("x : " + x + " y : " + y + " x1 : " + cpt.brush.Buff[1].X + " y1 " + cpt.brush.Buff[1].Y);
+						if (x >= (cpt.brush.Buff[1].X - 5) && x <= (cpt.brush.Buff[1].X + 5) && y >= (cpt.brush.Buff[1].Y - 5) && y <= (cpt.brush.Buff[1].Y + 5)) {
+							cpt.brush.Buff.push({"Fct" : "lineTo", "X" : cpt.brush.Buff[1].X, "Y" : cpt.brush.Buff[1].Y });
+							cpt.brush.Buff.push({"Fct" : "closePath" });
+							cpt.brush.Buff.push({"Fct" : "stroke" });
+							cpt.brush.Buff.push({"Fct" : "fill" });	
+							cpt.data[cpt.index] = cpt.data[cpt.index].concat(cpt.brush.Buff);
+							cpt.dat();  
+							cpt.brush.LastX = null;
+							cpt.brush.LastY = null;
+							cpt.brush.Buff = [];
+							reset = true;
+							/*
+							if (cpt.brush.Slc.indexOf("(Linie)") != -1) {
+								
+								alert(cpt.brush.Buff.length);
+							}
+							*/
+						}
+					}
+					if (!reset) {
+						if (cpt.brush.LastX == null || cpt.brush.LastY == null) {
+							cpt.brush.Buff.push({"Fct" : "beginPath" });
+							cpt.brush.Buff.push({"Fct" : "moveTo", "X" : x, "Y" : y });
+							cpt.brush.LastX = x;
+							cpt.brush.LastY = y;
+						}
+						else {
+							cpt.brush.Buff.push({"Fct" : "lineTo", "X" : x, "Y" : y });	
+							// cpt.brush.Buff.push({"Fct" : "moveTo", "X" : x, "Y" : y });
+							cpt.dim();
+							cpt.dat();
+							for (let i = 0; i < cpt.brush.Buff.length; i++) {
+								cpt.drafi( cpt.brush.Buff[i].Fct, 
+								cpt.brush.Buff[i].X, 
+								cpt.brush.Buff[i].Y
+								);
+							}
+							cpt.drafi("stroke");	
+							// cpt.drafi("fill");							
+						}
+					}                
+				}
+			});
+			cpt.elem.addEventListener("mouseup", function() {
+				cpt.drg = false;
+				if (document.getElementsByClassName(cpt.tools.id + "_dataToggler")[0].checked) {
+					//document.getElementsByClassName(cpt.tools.id + "_dataEditArea")[0].innerHTML = "";
+					document.getElementsByClassName(cpt.tools.id + "_dataEditArea")[0].value = JSON.stringify(cpt.data[cpt.index]);
+					document.getElementsByClassName(cpt.tools.id + "_dataEditArea")[0].style.display = "block";
+					/*
+					for (let i = cpt.data[cpt.index].length; i >= 0; i--) {
+						let index = cpt.data[cpt.index].length - i;
+						let funky = cpt.data[cpt.index][index].Fct.toString();
+						document.getElementsByClassName(cpt.tools.id + "_dataEditArea")[0].innerHTML += i 
+						+ " " + '<input type="text" value="' + funky + '"/><br/>';
+					}
+					*/
 				}
 				else {
-					cpt.dt[cpt.ix].push({"Fct" : "lineTo", "X" : x, "Y" : y });	
-					cpt.dt[cpt.ix].push({"Fct" : "stroke" });
-					cpt.dim();
-					cpt.dat();	
-					cpt.brs.LastX = null;
-					cpt.brs.LastY = null;
+					document.getElementsByClassName(cpt.tools.id + "_dataEditArea")[0].value = "";
+					document.getElementsByClassName(cpt.tools.id + "_dataEditArea")[0].style.display = "none";
 				}
-			}            
-            else if (cpt.brs.Slc.indexOf("Figur") != -1) {
-				let x = event.pageX - (cpt.id.getBoundingClientRect().left + window.scrollX);
-				let y = event.pageY - (cpt.id.getBoundingClientRect().top + window.scrollY);
-                // let x = event.pageX - cpt.id.offsetLeft;
-				// let y = event.pageY - cpt.id.offsetTop;
-                let reset = false;
-                
-                if (cpt.brs.Buff.length > 0) {
-                    // console.log("x : " + x + " y : " + y + " x1 : " + cpt.brs.Buff[1].X + " y1 " + cpt.brs.Buff[1].Y);
-                    if (x >= (cpt.brs.Buff[1].X - 5) && x <= (cpt.brs.Buff[1].X + 5) && y >= (cpt.brs.Buff[1].Y - 5) && y <= (cpt.brs.Buff[1].Y + 5)) {
-					    cpt.brs.Buff.push({"Fct" : "lineTo", "X" : cpt.brs.Buff[1].X, "Y" : cpt.brs.Buff[1].Y });
-                        cpt.brs.Buff.push({"Fct" : "closePath" });
-                        cpt.brs.Buff.push({"Fct" : "stroke" });
-                        cpt.brs.Buff.push({"Fct" : "fill" });	
-                        cpt.dt[cpt.ix] = cpt.dt[cpt.ix].concat(cpt.brs.Buff);
-		                cpt.dat();  
-                        cpt.brs.LastX = null;
-                        cpt.brs.LastY = null;
-                        cpt.brs.Buff = [];
-                        reset = true;
-                        /*
-                        if (cpt.brs.Slc.indexOf("(Linie)") != -1) {
-                            
-                            alert(cpt.brs.Buff.length);
-                        }
-                        */
-                    }
-                }
-                if (!reset) {
-                    if (cpt.brs.LastX == null || cpt.brs.LastY == null) {
-					    cpt.brs.Buff.push({"Fct" : "beginPath" });
-					    cpt.brs.Buff.push({"Fct" : "moveTo", "X" : x, "Y" : y });
-					    cpt.brs.LastX = x;
-					    cpt.brs.LastY = y;
-				    }
-				    else {
-					    cpt.brs.Buff.push({"Fct" : "lineTo", "X" : x, "Y" : y });	
-                        // cpt.brs.Buff.push({"Fct" : "moveTo", "X" : x, "Y" : y });
-					    cpt.dim();
-					    cpt.dat();
-                        for (let i = 0; i < cpt.brs.Buff.length; i++) {
-                            cpt.drafi( cpt.brs.Buff[i].Fct, 
-					        cpt.brs.Buff[i].X, 
-					        cpt.brs.Buff[i].Y
-				            );
-                        }
-                        cpt.drafi("stroke");	
-                        // cpt.drafi("fill");							
-				    }
-                }                
-            }
-		});
-		cpt.id.addEventListener("mouseup", function() {
-			cpt.drg = false;
-            if (document.getElementsByClassName(cpt.tl.id + "_dataToggler")[0].checked) {
-                //document.getElementsByClassName(cpt.tl.id + "_dataEditArea")[0].innerHTML = "";
-                document.getElementsByClassName(cpt.tl.id + "_dataEditArea")[0].value = JSON.stringify(cpt.dt[cpt.ix]);
-                document.getElementsByClassName(cpt.tl.id + "_dataEditArea")[0].style.display = "block";
-                /*
-                for (let i = cpt.dt[cpt.ix].length; i >= 0; i--) {
-                    let index = cpt.dt[cpt.ix].length - i;
-                    let funky = cpt.dt[cpt.ix][index].Fct.toString();
-                    document.getElementsByClassName(cpt.tl.id + "_dataEditArea")[0].innerHTML += i 
-                    + " " + '<input type="text" value="' + funky + '"/><br/>';
-                }
-                */
-            }
-            else {
-                document.getElementsByClassName(cpt.tl.id + "_dataEditArea")[0].value = "";
-                document.getElementsByClassName(cpt.tl.id + "_dataEditArea")[0].style.display = "none";
-            }
-            /*
-			if (document.getElementsByClassName(cpt.tl.id + "_selectedFunction")[0].value != "Linie") {	
-				
-			}
-			else {
-				
-			}
-            */
-		});
-		cpt.id.addEventListener("mouseout", function() {
-			cpt.drg = false;
-		});
+				/*
+				if (document.getElementsByClassName(cpt.tools.id + "_selectedFunction")[0].value != "Linie") {	
+					
+				}
+				else {
+					
+				}
+				*/
+			});
+			cpt.elem.addEventListener("mouseout", function() {
+				cpt.drg = false;
+			});
 		}
-		if (cpt.set.fit) {
+		if (cpt.settings.fit) {
 			window.addEventListener("resize", cpt.ref);
 		}
-        if (cpt.set.key) {           
+        if (cpt.settings.key) {           
             window.addEventListener("keydown", function (event) {		
-				if (!cpt.set.foc) {
+				if (!cpt.settings.foc) {
 					var k = event.keyCode;
 					switch (k) {
-						case 81 : document.getElementsByClassName(cpt.tl.id + "_selectedFunction")[0].value = (parseInt(cpt.fct.indexOf(cpt.brs.Slc)) > 0 ? cpt.fct[parseInt(cpt.fct.indexOf(cpt.brs.Slc)) - 1] : cpt.fct[parseInt(cpt.fct.indexOf(cpt.brs.Slc))]); break;
-						case 65 : document.getElementsByClassName(cpt.tl.id + "_selectedFunction")[0].value = (parseInt(cpt.fct.indexOf(cpt.brs.Slc)) < cpt.fct.length - 1 ? cpt.fct[parseInt(cpt.fct.indexOf(cpt.brs.Slc)) + 1] : cpt.fct[parseInt(cpt.fct.indexOf(cpt.brs.Slc))]); break;
-						case 87 : document.getElementsByClassName(cpt.tl.id + "_height")[0].value = parseInt(document.getElementsByClassName(cpt.tl.id + "_height")[0].value) - 1; break;
-						case 83 : document.getElementsByClassName(cpt.tl.id + "_height")[0].value = parseInt(document.getElementsByClassName(cpt.tl.id + "_height")[0].value) + 1; break;
-						case 69 : document.getElementsByClassName(cpt.tl.id + "_width")[0].value = parseInt(document.getElementsByClassName(cpt.tl.id + "_width")[0].value) - 1; break;
-						case 68 : document.getElementsByClassName(cpt.tl.id + "_width")[0].value = parseInt(document.getElementsByClassName(cpt.tl.id + "_width")[0].value) + 1; break;
-						case 82 : document.getElementsByClassName(cpt.tl.id + "_lineWidth")[0].value = parseInt(document.getElementsByClassName(cpt.tl.id + "_lineWidth")[0].value) > 0 ? parseInt(document.getElementsByClassName(cpt.tl.id + "_lineWidth")[0].value) - 1 : parseInt(document.getElementsByClassName(cpt.tl.id + "_lineWidth")[0].value); cpt.clw(); break;                    
-						case 70 : document.getElementsByClassName(cpt.tl.id + "_lineWidth")[0].value = parseInt(document.getElementsByClassName(cpt.tl.id + "_lineWidth")[0].value) + 1; cpt.clw(); break;                    
-						case 84 : document.getElementsByClassName(cpt.tl.id + "_selectedFill")[0].value = (parseInt(cpt.col.indexOf(cpt.brs.Fil)) > 0 ? cpt.col[parseInt(cpt.col.indexOf(cpt.brs.Fil)) - 1] : cpt.col[parseInt(cpt.col.indexOf(cpt.brs.Fil))]); cpt.cfl(); break;
-						case 71 : document.getElementsByClassName(cpt.tl.id + "_selectedFill")[0].value = (parseInt(cpt.col.indexOf(cpt.brs.Fil)) < cpt.col.length - 1 ? cpt.col[parseInt(cpt.col.indexOf(cpt.brs.Fil)) + 1] : cpt.col[parseInt(cpt.col.indexOf(cpt.brs.Fil))]); cpt.cfl(); break;
-						case 89 : document.getElementsByClassName(cpt.tl.id + "_selectedStroke")[0].value = (parseInt(cpt.col.indexOf(cpt.brs.Str)) > 0 ? cpt.col[parseInt(cpt.col.indexOf(cpt.brs.Str)) - 1] : cpt.col[parseInt(cpt.col.indexOf(cpt.brs.Str))]); cpt.cst(); break;
-						case 72 : document.getElementsByClassName(cpt.tl.id + "_selectedStroke")[0].value = (parseInt(cpt.col.indexOf(cpt.brs.Str)) < cpt.col.length - 1 ? cpt.col[parseInt(cpt.col.indexOf(cpt.brs.Str)) + 1] : cpt.col[parseInt(cpt.col.indexOf(cpt.brs.Str))]); cpt.cst(); break;				
+						case 81 : document.getElementsByClassName(cpt.tools.id + "_selectedFunction")[0].value = (parseInt(cpt.methods.indexOf(cpt.brush.Slc)) > 0 ? cpt.methods[parseInt(cpt.methods.indexOf(cpt.brush.Slc)) - 1] : cpt.methods[parseInt(cpt.methods.indexOf(cpt.brush.Slc))]); break;
+						case 65 : document.getElementsByClassName(cpt.tools.id + "_selectedFunction")[0].value = (parseInt(cpt.methods.indexOf(cpt.brush.Slc)) < cpt.methods.length - 1 ? cpt.methods[parseInt(cpt.methods.indexOf(cpt.brush.Slc)) + 1] : cpt.methods[parseInt(cpt.methods.indexOf(cpt.brush.Slc))]); break;
+						case 87 : document.getElementsByClassName(cpt.tools.id + "_height")[0].value = parseInt(document.getElementsByClassName(cpt.tools.id + "_height")[0].value) - 1; break;
+						case 83 : document.getElementsByClassName(cpt.tools.id + "_height")[0].value = parseInt(document.getElementsByClassName(cpt.tools.id + "_height")[0].value) + 1; break;
+						case 69 : document.getElementsByClassName(cpt.tools.id + "_width")[0].value = parseInt(document.getElementsByClassName(cpt.tools.id + "_width")[0].value) - 1; break;
+						case 68 : document.getElementsByClassName(cpt.tools.id + "_width")[0].value = parseInt(document.getElementsByClassName(cpt.tools.id + "_width")[0].value) + 1; break;
+						case 82 : document.getElementsByClassName(cpt.tools.id + "_lineWidth")[0].value = parseInt(document.getElementsByClassName(cpt.tools.id + "_lineWidth")[0].value) > 0 ? parseInt(document.getElementsByClassName(cpt.tools.id + "_lineWidth")[0].value) - 1 : parseInt(document.getElementsByClassName(cpt.tools.id + "_lineWidth")[0].value); cpt.clw(); break;                    
+						case 70 : document.getElementsByClassName(cpt.tools.id + "_lineWidth")[0].value = parseInt(document.getElementsByClassName(cpt.tools.id + "_lineWidth")[0].value) + 1; cpt.clw(); break;                    
+						case 84 : document.getElementsByClassName(cpt.tools.id + "_selectedFill")[0].value = (parseInt(cpt.colours.indexOf(cpt.brush.Fil)) > 0 ? cpt.colours[parseInt(cpt.colours.indexOf(cpt.brush.Fil)) - 1] : cpt.colours[parseInt(cpt.colours.indexOf(cpt.brush.Fil))]); cpt.cfl(); break;
+						case 71 : document.getElementsByClassName(cpt.tools.id + "_selectedFill")[0].value = (parseInt(cpt.colours.indexOf(cpt.brush.Fil)) < cpt.colours.length - 1 ? cpt.colours[parseInt(cpt.colours.indexOf(cpt.brush.Fil)) + 1] : cpt.colours[parseInt(cpt.colours.indexOf(cpt.brush.Fil))]); cpt.cfl(); break;
+						case 89 : document.getElementsByClassName(cpt.tools.id + "_selectedStroke")[0].value = (parseInt(cpt.colours.indexOf(cpt.brush.Str)) > 0 ? cpt.colours[parseInt(cpt.colours.indexOf(cpt.brush.Str)) - 1] : cpt.colours[parseInt(cpt.colours.indexOf(cpt.brush.Str))]); cpt.cst(); break;
+						case 72 : document.getElementsByClassName(cpt.tools.id + "_selectedStroke")[0].value = (parseInt(cpt.colours.indexOf(cpt.brush.Str)) < cpt.colours.length - 1 ? cpt.colours[parseInt(cpt.colours.indexOf(cpt.brush.Str)) + 1] : cpt.colours[parseInt(cpt.colours.indexOf(cpt.brush.Str))]); cpt.cst(); break;				
 					}
 					
 					cpt.dat();
-					cpt.moveMouse(cpt.brs.CursX,cpt.brs.CursY);
-					// cpt.id.dispatchEvent(new Event("mousemove"));
+					cpt.moveMouse(cpt.brush.CursX,cpt.brush.CursY);
+					// cpt.elem.dispatchEvent(new Event("mousemove"));
 				}
             });
         }
